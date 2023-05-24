@@ -1,0 +1,849 @@
+#add  ACTOR
+Admin_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(alc)_MENU(Gestion Commande):
+  id: Long ID
+  description: String
+
+#---------------------------------------- SALARY ---------------------------
+WorkloadBonus_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(salary)_MENU(Gestion Salaire):
+  id: Long ID
+  code: String REF_REQUIERED
+  nombreSession: Integer
+  prix: BigDecimal
+
+#teacher will just view his bonus
+WorkloadBonusProf_MS(ms1)_INITIALISATION_ROLES(admin,teacher)_SUB-MODULE(salary)_MENU(Gestion Salaire):
+  id: Long ID
+  workloadBonus: WorkloadBonus
+  prof: Prof
+  mois: Integer
+  annee: Integer
+  salary: Salary
+
+Salary_MS(ms1)_INITIALISATION_ROLES(admin,teacher)_SUB-MODULE(salary)_MENU(Gestion Salaire):
+  id: Long ID
+  code: String REF_REQUIERED
+  prof: Prof
+  mois: Integer
+  annee: Integer
+  nbrSessionMensuel: BigDecimal
+  payer: Boolean
+  totalPayment: BigDecimal
+  totalBonusClassAverage: BigDecimal
+  totalBonusWorkload: BigDecimal
+
+#---------------------------------------- Course ---------------------------
+VocabularyQuiz_MS(ms1)_INITIALISATION_ROLES(admin,teacher,student)_SUB-MODULE(course)_MENU(Gestion Cours):
+  id: Long ID
+  libelle: String LABEL_REQUIERED
+  dateDebut: LocalDateTime
+  dateFin: LocalDateTime
+  vocabularys: Vocabulary List
+  section: Section
+
+Vocabulary_MS(ms1)_INITIALISATION_ROLES(admin,teacher,student)_SUB-MODULE(course)_MENU(Gestion Cours):
+  id: Long ID
+  ref: String
+  numero: Long
+  word: String
+  libelle: String
+  result: String
+  explication: String
+  exemple: String
+  image: String
+  section: Section
+  vocabularyQuiz: VocabularyQuiz
+
+Parcours_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(course)_MENU(Gestion Cours):
+  id: Long ID
+  datePublication: LocalDateTime
+  dateCreation: LocalDateTime
+  description: String LARGE
+  code: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+  numeroOrder: Integer
+  nombreCours: Integer
+  centre: Centre
+  courss: Cours List
+  etudiants: Etudiant List
+
+Centre_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(course)_MENU(Gestion Cours):
+  id: Long ID
+  ref: String REF_REQUIERED
+  libelle: String
+  description: String
+  log: String
+  password: String
+  parcourss: Parcours List
+
+Cours_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(course)_MENU(Gestion Cours):
+  id: Long ID
+  code: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+  description: String LARGE
+  image: String
+  etatCours: EtatCours
+  parcours: Parcours
+  nombreSectionFinalise: Integer
+  nombreSectionEnCours: Integer
+  nombreLinkEnCours: Integer
+  nombreLinkFinalise: Integer
+  numeroOrder: Integer
+  sections: Section List
+  homeWorks: HomeWork List
+
+EtatCours_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(course)_MENU(Gestion Cours):
+  id: Long ID
+  code: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+
+Section_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(course)_MENU(Gestion Cours):
+  id: Long ID
+  code: String REF_REQUIERED
+  libelle: String
+  urlImage: String
+  urlImage2: String
+  urlImage3: String
+  urlVideo: String
+  contenu: String
+  questions: String
+  indicationProf: String
+  numeroOrder: Integer
+  categorieSection: CategorieSection
+  cours: Cours
+  url: Integer
+  content: Integer
+  sectionItems: SectionItem List
+  sessionCours: SessionCours
+
+SectionItem_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(course)_MENU(Gestion Cours):
+  id: Long ID
+  imageUrl: String
+  response: String
+  transcription: String
+  translation: String
+  explanation: String
+  example: String
+  synonyms: String
+  section: Section
+
+
+CategorieSection_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(course)_MENU(Gestion Cours):
+  id: Long ID
+  code: String REF_REQUIERED
+  libelle: String
+  numeroOrder: Integer
+  superCategorieSection: SuperCategorieSection
+  sections: Section List
+
+
+SuperCategorieSection_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(course)_MENU(Gestion Cours):
+  id: Long ID
+  code: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+  categorieSections: CategorieSection List
+
+LevelTestConfiguration_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(course)_MENU(Gestion Cours):
+  id: Long ID
+  noteMin: BigDecimal
+  noteMax: BigDecimal
+  parcours: Parcours
+
+#---------------------------------------- TEACHER ---------------------------
+# add ACTOR
+Prof_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(prof)_MENU(Gestion Prof):
+  id: Long ID
+  ref: String REF_REQUIERED
+  about: String
+  email: String
+  parcours: Parcours # it was lvelMin: Parcours and   levelMax: Parcours
+  trancheHoraireProfs: TrancheHoraireProf List
+  categorieProf: CategorieProf
+  classRooms: ClassRoom List
+  recommendTeachers: RecommendTeacher List
+  typeTeacher: TypeTeacher
+
+TypeTeacher_MS(ms1)_INITIALISATION_ROLES(admin,teacher)_SUB-MODULE(prof)_MENU(Gestion Prof):
+  id: Long ID
+  libelle: String LABEL_REQUIERED
+  code: String REF_REQUIERED
+
+
+TrancheHoraireProf_MS(ms1)_INITIALISATION_ROLES(admin,teacher)_SUB-MODULE(prof)_MENU(Gestion Prof):
+  id: Long ID
+  prof: Prof
+  startHour: String
+  endHour: String
+  day: Integer
+  groupIndex: Integer
+  profsId: Long
+
+
+CategorieProf_MS(ms1)_INITIALISATION_ROLES(admin,teacher)_SUB-MODULE(prof)_MENU(Gestion Prof):
+  id: Long ID
+  code: String REF_REQUIERED
+  level: String
+  lessonRate: BigDecimal
+  profs: Prof List
+
+
+
+ScheduleProf_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(prof)_MENU(Gestion Prof):
+  id: Long ID
+  subject: String
+  startTime: LocalDateTime
+  endTime: LocalDateTime
+  ref: String
+  groupeEtudiant: GroupeEtudiant
+  prof: Prof
+  cours: Cours
+  grpName: String
+  profName: String
+  profsId: Long
+
+CalendrierProf_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(prof)_MENU(Gestion Prof):
+  id: Long ID
+  ref: String REF_REQUIERED
+  startTime: String
+  endTime: String
+  startRecur: LocalDateTime
+  endRecur: LocalDateTime
+  prof: Prof
+  etudiant: Etudiant
+
+ClassAverageBonusProf_MS(ms1)_INITIALISATION_ROLES(admin,teacher)_SUB-MODULE(prof)_MENU(Gestion Prof):
+  id: Long ID
+  prof: Prof
+  mois: Integer
+  annee: Integer
+  salary: Salary
+#---------------------------------------- RECOMMENDATION/RECLAMATION ---------------------------
+
+
+RecommendTeacher_MS(ms1)_INITIALISATION_ROLES(admin,teacher)_SUB-MODULE(recom-recla)_MENU(Recommendation/Reclamation):
+  id: Long ID
+  ref: String REF_REQUIERED
+  nombrevote: Integer
+  nom: String
+  prenom: String
+  commentaire: String LARGE
+  telephone: String
+  login: String
+  dateRecommamdation: LocalDateTime
+  prof: Prof
+
+ReclamationProf_MS(ms1)_INITIALISATION_ROLES(admin,teacher)_SUB-MODULE(recom-recla)_MENU(Recommendation/Reclamation):
+  id: Long ID
+  reference: String REF_REQUIERED
+  dateReclamation: LocalDateTime
+  message: String LARGE
+  traite: Boolean
+  dateTraitement: LocalDateTime
+  dateReponse: LocalDateTime
+  postView: Boolean
+  commentaireTraiteur: String LARGE
+  objetReclamationProf: String
+  admin: Admin
+  prof: Prof
+  typeReclamationProf: TypeReclamationProf
+
+
+TypeReclamationProf_MS(ms1)_INITIALISATION_ROLES(admin,teacher)_SUB-MODULE(recom-recla)_MENU(Recommendation/Reclamation):
+  id: Long ID
+  code: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+
+
+ReclamationEtudiant_MS(ms1)_INITIALISATION_ROLES(admin,student)_SUB-MODULE(recom-recla)_MENU(Recommendation/Reclamation):
+  id: Long ID
+  reference: String REF_REQUIERED
+  dateReclamation: LocalDateTime
+  message: String LARGE
+  setFrom: String
+  img: String
+  traite: Boolean
+  dateTraitement: LocalDateTime
+  dateReponse: LocalDateTime
+  postView: Boolean
+  objetReclamationEtudiant: String
+  commentaireTraiteur: String LARGE
+  username: String
+  typeReclamationEtudiant: TypeReclamationEtudiant
+
+
+
+TypeReclamationEtudiant_MS(ms1)_INITIALISATION_ROLES(admin,student)_SUB-MODULE(recom-recla)_MENU(Recommendation/Reclamation):
+  id: Long ID
+  code: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+
+
+#---------------------------------------- Inscription ---------------------------
+Inscription_MS(ms1)_INITIALISATION_ROLES(admin,student)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  numeroInscription: Integer
+  etudiant: Etudiant
+  etatInscription: EtatInscription
+  parcours: Parcours
+  groupeEtude: GroupeEtude
+  statutSocial: StatutSocial
+  interetEtudiant: InteretEtudiant
+  niveauEtude: NiveauEtude
+  fonction: Fonction
+  quiz: Quiz
+  noteQuizNiveau: BigDecimal
+  quizFinished: Boolean
+  dateRegistration: String
+  datedebutinscription: LocalDateTime
+  datefininscription: LocalDateTime
+  packStudent: PackStudent
+  skill: Skill
+  skype: String
+
+
+Skill_MS(ms1)_INITIALISATION_ROLES(admin,student)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  code: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+
+
+Fonction_MS(ms1)_INITIALISATION_ROLES(admin,student)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  code: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+
+
+InteretEtudiant_MS(ms1)_INITIALISATION_ROLES(admin,student)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  code: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+
+
+GroupeEtude_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  libelle: String LABEL_REQUIERED
+  description: String LARGE
+  nombreEtudiant: Long
+
+GroupeEtudiant_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  libelle: String
+  niveau: String #NiveauEtude must be beannnnnnn not a String!!!!!
+  dateDebut: LocalDateTime
+  dateFin: LocalDateTime
+  nombrePlace: Long
+  nombrePlacevide: Long
+  nombrePlaceNonVide: Long
+  groupeEtudiantDetails: GroupeEtudiantDetail List
+  groupeEtude: GroupeEtude
+  parcours: Parcours
+  prof: Prof
+
+GroupeEtudiantDetail_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  groupeEtudiant: GroupeEtudiant
+  etudiant: Etudiant
+
+
+
+Etudiant_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  ref: String REF_REQUIERED
+  teacherLocality: TeacherLocality # it was just a string
+  groupOption: String
+  email: String
+  etatEtudiantSchedule: EtatEtudiantSchedule
+  parcours: Parcours
+  quizEtudiants: QuizEtudiant List # it was just quizEtudiant
+  groupeEtude: GroupeEtude
+  groupeEtudiantDetails: GroupeEtudiantDetail List
+  packStudent: PackStudent
+  statutSocial: StatutSocial
+  interetEtudiant: InteretEtudiant
+  niveauEtude: NiveauEtude
+  skill: Skill
+  fonction: Fonction
+  langue: Langue
+
+Paiement_MS(ms1)_INITIALISATION_ROLES(admin,teacher)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  prof: Prof
+  datePaiement: LocalDateTime
+  groupeEtudiant: GroupeEtudiant
+
+EtatEtudiantSchedule_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  ref: String REF_REQUIERED
+  libelle: String REF_LABEL
+  couleur: String
+
+
+EtatEtudiant_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  reference: String REF_REQUIERED
+  username: String
+  firstName: String
+  lastName: String
+  nationnalite: String
+  schedule1: String
+  schedule2: String
+  lastClass: String
+  nbrClass: String
+  etat: String
+  etatNumber: Long
+
+StatutSocial_MS(ms1)_INITIALISATION_ROLES(admin,student)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  code: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+
+
+NiveauEtude_IMPORT_MS(ms1)_INITIALISATION_ROLES(admin,student)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  libelle: String LABEL_REQUIERED
+  code: String REF_REQUIERED
+
+TeacherLocality_REFERENTIEL_IMPORT_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  code: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+
+
+
+PackStudent_MS(ms1)_INITIALISATION_ROLES(admin,student)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  nombreCours: Integer
+  forGroupe: Boolean
+  code: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+  description: String LARGE
+  preRequisites: String
+  whyTakeThisCourse: String
+  expectations: String
+  parcours: Parcours
+  imgUrl: String
+  price: Price
+  totalStudents: Integer
+  rating: String
+  oldPrice: String
+
+Price_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  price: BigDecimal
+  oldPrice: BigDecimal
+  lib: String LABEL_REQUIERED
+  nreCourse: BigDecimal
+  nreHours: BigDecimal
+  nreMonth: BigDecimal
+  forGroup: Boolean
+
+EtatInscription_MS(ms1)_INITIALISATION_ROLES(admin,student)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  ref: String REF_REQUIERED
+  libelle: String REF_LABEL
+
+InviteStudent_MS(ms1)_INITIALISATION_ROLES(admin,student)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  code: String REF_REQUIERED
+  etudiant: Etudiant
+  isAccepted: Boolean
+  isPaidPack: Boolean
+  emailInvited: String
+  dateSentInvitation: LocalDateTime
+  dateAcceptInvitation: LocalDateTime
+  datePayPack: LocalDateTime
+
+EtudiantReview_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  etudiant: Etudiant
+  prof: Prof
+  cours: Cours
+  review: Integer
+  comment: String
+  dateReview: LocalDateTime
+
+EtudiantCours_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  etudiant: Etudiant
+  prof: Prof
+  cours: Cours
+  payer: Boolean
+  dateFin: LocalDateTime
+
+
+EtudiantClassRoom_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  classRoom: ClassRoom
+  etudiant: Etudiant
+
+
+
+Langue_MS(ms1)_INITIALISATION_ROLES(admin,student)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  ref: String REF_REQUIERED
+  libelle: String REF_LABEL
+
+
+
+Dictionary_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  word: String LABEL
+  definition: String LARGE
+  etudiant: Etudiant
+
+ConfirmationToken_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  token: String
+  expiresAt: LocalDateTime
+  createdAt: LocalDateTime
+  confirmedAt: LocalDateTime
+  etudiant: Etudiant
+
+ProfReview_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(inscription)_MENU(Gestion Inscription):
+  id: Long ID
+  etudiant: Etudiant
+  prof: Prof
+  cours: Cours
+  review: Integer
+  comment: String LARGE
+  dateReview: LocalDateTime
+#---------------------------------------- Learning ---------------------------
+SessionCours_MS(ms1)_INITIALISATION_ROLES(admin,teacher)_SUB-MODULE(learning)_MENU(Gestion Etude):
+  id: Long ID
+  reference: String REF_REQUIERED
+  prof: Prof
+  cours: Cours
+  groupeEtudiant: GroupeEtudiant
+  duree: BigDecimal
+  totalheure: BigDecimal
+  mois: BigDecimal
+  annee: BigDecimal
+  dateFin: LocalDateTime
+  dateDebut: LocalDateTime
+  payer: Boolean
+  salary: Salary
+  sections: Section List
+
+
+#---------------------------------------- Homework ---------------------------
+HomeWork_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(homework)_MENU(Gestion Homework):
+  id: Long ID
+  libelle: String LABEL_REQUIERED
+  urlImage: String
+  urlVideo: String
+  homeWorkQuestions: HomeWorkQuestion List
+  homeWorkEtudiants: HomeWorkEtudiant List
+  cours: Cours
+  typeHomeWork: TypeHomeWork
+
+HomeWorkQuestion_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(homework)_MENU(Gestion Homework):
+  id: Long ID
+  ref: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+  numero: Integer
+  pointReponseJuste: BigDecimal
+  pointReponsefausse: BigDecimal
+  typeDeQuestion: TypeDeQuestion
+  howeWorkQSTReponses: HoweWorkQSTReponse List
+  homeWork: HomeWork
+
+HomeWorkEtudiant_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(homework)_MENU(Gestion Homework):
+  id: Long ID
+  etudiant: Etudiant
+  homeWork: HomeWork
+  reponseEtudiantHomeWorks: ReponseEtudiantHomeWork List
+  note: BigDecimal
+  resultatHomeWork: ResultatHomeWork
+  dateHomeWork: LocalDateTime
+
+TypeHomeWork_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(homework)_MENU(Gestion Homework):
+  id: Long ID
+  code: String REF_REQUIERED
+  lib: String LABEL_REQUIERED
+
+ReponseEtudiantHomeWork_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(homework)_MENU(Gestion Homework):
+  id: Long ID
+  howeWorkQSTReponse: HoweWorkQSTReponse
+  answer: String
+  homeWorkEtudiant: HomeWorkEtudiant
+  homeWorkQuestion: HomeWorkQuestion
+  profNote: String
+  note: BigDecimal
+
+HoweWorkQSTReponse_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(homework)_MENU(Gestion Homework):
+  id: Long ID
+  ref: String REF_REQUIERED
+  lib: String LABEL_REQUIERED
+  etatReponse: EtatReponse # it was just a string
+  numero: Integer
+  homeWorkQuestion: HomeWorkQuestion
+
+
+ResultatHomeWork_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(homework)_MENU(Gestion Homework):
+  id: Long ID
+  libelle: String LABEL_REQUIERED
+  code: String REF_REQUIERED
+
+
+#---------------------------------------- Quiz ---------------------------
+
+Quiz_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(quiz)_MENU(Gestion Quiz):
+  id: Long ID
+  ref: String REF_REQUIERED
+  lib: String LABEL_REQUIERED
+  dateDebut: LocalDateTime
+  dateFin: LocalDateTime
+  questions: Question List
+  quizEtudiants: QuizEtudiant List # it was quizEtudiant and I add s
+  section: Section
+  numero: Long
+  seuilReussite: Long
+
+ReponseEtudiant_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(quiz)_MENU(Gestion Quiz):
+  id: Long ID
+  ref: String REF_REQUIERED
+  reponse: Reponse
+  answer: String
+  quizEtudiant: QuizEtudiant
+  note: BigDecimal
+  question: Question
+
+
+Reponse_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(quiz)_MENU(Gestion Quiz):
+  id: Long ID
+  ref: String REF_REQUIERED
+  lib: String LABEL_REQUIERED
+  etatReponse: EtatReponse # it was just a string
+  numero: Long
+  question: Question
+
+EtatReponse_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(quiz)_MENU(Gestion Quiz):
+  id: Long ID
+  code: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+
+QuizClassRoom_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(quiz)_MENU(Gestion Quiz):
+  id: Long ID
+  classRoom: ClassRoom
+  quiz: Quiz
+
+ClassRoom_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(quiz)_MENU(Gestion Quiz):
+  id: Long ID
+  libelle: String LABEL_REQUIERED
+  description: String LARGE
+  prof: Prof
+  etudiantClassRooms: EtudiantClassRoom List
+  quizClassRooms: QuizClassRoom List
+
+QuizEtudiant_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(quiz)_MENU(Gestion Quiz):
+  id: Long ID
+  ref: String REF_REQUIERED
+  etudiant: Etudiant
+  quiz: Quiz
+  reponseEtudiants: ReponseEtudiant List # it was reponseEtudiant and I add s
+  note: BigDecimal
+  resultat: String
+  questionCurrent: Long
+
+
+Question_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(quiz)_MENU(Gestion Quiz):
+  id: Long ID
+  ref: String REF_REQUIERED
+  libelle: String REF_LABEL
+  urlImg: String
+  urlVideo: String
+  numero: Long
+  pointReponseJuste: BigDecimal
+  pointReponsefausse: BigDecimal
+  typeDeQuestion: TypeDeQuestion
+  reponses: Reponse List
+  quiz: Quiz
+  homeWork: HomeWork
+
+
+
+
+TypeDeQuestion_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(quiz)_MENU(Gestion Quiz):
+  id: Long ID
+  ref: String REF_REQUIERED
+  lib: String LABEL_REQUIERED
+
+
+
+
+
+
+
+
+#---------------------------------------- Common ---------------------------
+
+News_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(common)_MENU(Gestion Common):
+  id: Long ID
+  ref: String REF_REQUIERED
+  libelle: String
+  image: String
+  description: String LARGE
+  dateNews: LocalDateTime
+  dateDebut: LocalDateTime
+  dateFin: LocalDateTime
+  numeroOrdre: Integer
+  destinataire: String
+
+Contact_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(common)_MENU(Gestion Common):
+  id: Long ID
+  name: String
+  email: String
+  phone: String
+  setFrom: String
+  dateContact: LocalDateTime
+  replied: Boolean
+  message: String LARGE
+
+
+
+ClassAverageBonus_MS(ms1)_INITIALISATION_ROLES(admin,teacher)_SUB-MODULE(common)_MENU(Gestion Common):
+  id: Long ID
+  code: String REF_REQUIERED
+  nombreSession: Integer
+  prix: BigDecimal
+
+
+#------------------------------------Faq-----------------------------------------
+
+FaqType_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(faq)_MENU(Gestion Faq):
+  id: Long ID
+  destinataire: String LARGE
+  libelle: String LABEL_REQUIERED
+
+FaqProf_MS(ms1)_INITIALISATION_ROLES(admin,teacher)_SUB-MODULE(faq)_MENU(Gestion Faq):
+  id: Long ID
+  description: String LARGE
+  libelle: String LABEL_REQUIERED
+  prof: Prof
+  admin: Admin
+  faqType: FaqType
+
+
+
+FaqEtudiant_MS(ms1)_INITIALISATION_ROLES(admin,student)_SUB-MODULE(faq)_MENU(Gestion Faq):
+  id: Long ID
+  description: String LARGE
+  libelle: String LABEL_REQUIERED
+  etudiant: Etudiant
+  admin: Admin
+  faqType: FaqType
+
+
+Faq_MS(ms1)_INITIALISATION_ROLES(admin,student,teacher)_SUB-MODULE(faq)_MENU(Gestion Faq):
+  id: Long ID
+  description: String LARGE
+  libelle: String LABEL_REQUIERED
+  faqType: FaqType
+
+
+
+
+
+
+
+
+#------------------------------------FreeTrial-----------------------------------------
+FreeTrial_IMPORT_MS(ms1)_INITIALISATION_ROLES(admin,student)_SUB-MODULE(freetrial)_MENU(Gestion Free Trial):
+  id: Long ID
+  reference: String REF_REQUIERED
+  prof: Prof
+  niveauEtude: NiveauEtude
+  dateFreeTrial: LocalDateTime
+  link: String
+
+  emailTeacherSent: Boolean
+  emailTeacherSendingDate: LocalDateTime
+  whatsTeacherSent: Boolean
+  whatsTeacherSendingDate: LocalDateTime
+
+  freeTrialStudentWhatsTemplate: FreeTrialStudentWhatsTemplate
+  freeTrialStudentEmailTemplate: FreeTrialStudentEmailTemplate
+  freeTrialTeacherEmailTemplate: FreeTrialTeacherEmailTemplate
+  freeTrialTeacherWhatsTemplate: FreeTrialTeacherWhatsTemplate
+  dateFreeTrialPremierRappel: LocalDateTime
+  dateFreeTrialPremierDeuxiemeRappel: LocalDateTime
+
+  nombreStudentTotal: Integer
+  freeTrialConfiguration: FreeTrialConfiguration
+  nombreStudentAbonne: Integer
+  nombreStudentPresent: Integer
+  statutFreeTrial: StatutFreeTrial
+  freeTrialDetails: FreeTrialDetail List
+
+
+FreeTrialDetail_IMPORT_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(freetrial)_MENU(Gestion Free Trial):
+  id: Long ID
+  freeTrial: FreeTrial
+  etudiant: Etudiant
+  presence: Boolean
+  whatsUpMessageSent: Boolean
+  dateEnvoiwhatsUpMessage: LocalDateTime
+  emailMessageSent: Boolean
+  dateEnvoiEmailMessage: LocalDateTime
+  abonne: Boolean
+
+FreeTrialStudentEmailTemplate_IMPORT_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(freetrial)_MENU(Gestion Free Trial):
+  id: Long ID
+  object: String
+  corps: String LARGE
+  source: String
+
+FreeTrialStudentWhatsTemplate_IMPORT_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(freetrial)_MENU(Gestion Free Trial):
+  id: Long ID
+  object: String
+  corps: String LARGE
+  source: String
+
+FreeTrialTeacherEmailTemplate_IMPORT_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(freetrial)_MENU(Gestion Free Trial):
+  id: Long ID
+  object: String
+  corps: String LARGE
+  source: String
+
+FreeTrialTeacherWhatsTemplate_IMPORT_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(freetrial)_MENU(Gestion Free Trial):
+  id: Long ID
+  object: String
+  corps: String LARGE
+  source: String
+
+FreeTrialConfiguration_IMPORT_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(freetrial)_MENU(Gestion Free Trial):
+  id: Long ID
+  dateApplicationDebut: LocalDateTime
+  dateApplicationFin: LocalDateTime
+  nombreStudentMax: Integer
+  nombreStudentMin: Integer
+
+FreeTrialformule_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(freetrial)_MENU(Gestion Free Trial):
+  id: Long ID
+  code: String REF_REQUIERED
+  inscription: Inscription
+  dayspeerweek: String
+  timeperday: String
+  teacherGenderoption: String
+  teacherAgeRange: String
+  teacherPersonnality: String
+  status: Boolean
+  dateConfirmation: LocalDateTime
+
+StatutFreeTrial_IMPORT_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(freetrial)_MENU(Gestion Free Trial):
+  id: Long ID
+  libelle: String LABEL_REQUIERED
+  code: String REF_REQUIERED
+  style: String
+
+
+Services_REFERENTIEL_IMPORT_MS(ms1)_INITIALISATION_ROLES(admin)_SUB-MODULE(freetrial)_MENU(Gestion Free Trial):
+  id: Long ID
+  code: String REF_REQUIERED
+  libelle: String LABEL_REQUIERED
+  description: String LARGE
+
+$CONFIG:
+  ms: "{name=ms1, packaging=myms1, url=http://localhost:8090/api/v1}"
+  currentMs: ms1
+
+
