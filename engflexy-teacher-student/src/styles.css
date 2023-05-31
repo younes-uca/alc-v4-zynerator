@@ -1,3 +1,45 @@
+/* for titles use => font-family: 'Bree Serif', serif; */
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+/*for text arabic use ==> font-family: 'Cairo', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.Bree-serif {
+  font-family: 'Bree Serif', serif !important;
+}
+
+.Cairo {
+  font-family: 'Cairo', sans-serif !important;
+}
+
+a {
+  text-decoration: none !important;
+  font-weight: 600 !important;
+}
+
+.roboto {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.nb-theme-default .nb-layout-header {
+  box-shadow: none;
+}
+
+nb-layout-header nav {
+  box-shadow: none !important;
+  width: 100%;
+}
+
+nb-sidebar {
+  box-shadow: none !important;
+}
+
+.bg-gray-700 {
+  background-color: #151a30 !important;
+}
+

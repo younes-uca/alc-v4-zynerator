@@ -1,5 +1,15 @@
-<div
-  [class.dark]="isDark"
-  class="container">
-  <app-sidebar></app-sidebar>
-</div>
+<nb-layout>
+  <nb-layout-header>
+    <app-navbar class="w-full"></app-navbar>
+  </nb-layout-header>
+  <nb-layout-column>
+    <div [class.dark]="is_dark"
+         class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </nb-layout-column>
+
+  <nb-sidebar [state]="state">
+    <app-sidebar></app-sidebar>
+  </nb-sidebar>
+</nb-layout>

@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {NbMenuItem, NbSidebarState, NbThemeService} from "@nebular/theme";
+import {AppComponent} from "../../app.component";
+import {LayoutService} from "../layout.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -6,24 +9,35 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  showDropDown: boolean = false;
-  routes: any = [
+  items: NbMenuItem[] = [
+
     {
-      link: '/',
-      icon: 'home',
-      name: 'Dashboard'
+      title: 'Dashboard',
+      link: 'student/dashboard',
+      icon: 'home'
     },
     {
-      link: '/schedule',
-      icon: 'calendar',
-      name: 'Schedule'
+      title: 'Schedule',
+      link: 'student/dashboard',
+      icon: 'calendar'
     },
     {
+      title: 'Profile',
+      link: 'student/dashboard',
+      icon: 'person'
+    },
+    {
+      title: 'Settings',
+      link: 'student/dashboard',
+      icon: 'settings-2'
+    },
+    {
+      title: 'Logout',
       link: '/logout',
-      icon: 'log-out',
-      name: 'Logout'
+      icon: 'log-out'
     },
   ];
+
 
   ngOnInit(): void {
   }

@@ -1,0 +1,41 @@
+<div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+  <div class="flex items-center sm:justify-between sm:gap-4">
+    <div class="relative">
+      <button
+        (click)="setState()"
+        type="button"
+        class="absolute end-1 top-1/2 -translate-y-1/2 rounded-md bg-transparent p-2 text-gray-600 dark:text-white transition hover:text-gray-700"
+      >
+        <nb-icon [icon]="state !== 'collapsed' ? 'arrow-circle-left': 'arrow-circle-right'"></nb-icon>
+      </button>
+    </div>
+
+    <img class="hidden sm:block" *ngIf="!appComponent?.is_dark"
+         ngSrc="./assets/images/logo/eng-black.webp"
+         width="65" height="65" alt="engflexy">
+    <img class="hidden sm:block" *ngIf="appComponent?.is_dark"
+         ngSrc="./assets/images/logo/eng-white.webp"
+         width="65" height="65" alt="engflexy">
+
+
+    <div class="flex flex-1 items-center justify-between gap-8 sm:justify-end">
+      <div class="flex gap-4">
+        <a
+          (click)="toggleTheme()"
+          [class.text-gray-600]="!isDarkTheme"
+          [class.white]="isDarkTheme"
+          class="block shrink-0 rounded-lg bg-transparent p-2.5  shadow-sm hover:text-gray-700">
+          <nb-icon [icon]="appComponent.is_dark ? 'sun':'moon'"></nb-icon>
+        </a>
+      </div>
+
+      <nb-user size="large"
+               class="border-gray-200 border-dashed border-1"
+               name="Youssef EL MOUDENE"
+               title="Student"></nb-user>
+
+    </div>
+  </div>
+</div>
+
+
