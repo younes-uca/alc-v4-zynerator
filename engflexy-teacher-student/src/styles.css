@@ -43,3 +43,11 @@ nb-sidebar {
   background-color: #151a30 !important;
 }
 
+nb-user.size-large.class-lesson .user-name {
+  font-size: .9375rem;
+  line-height: 2rem;
+  margin: 5px 0;
+  font-weight: bold;
+  text-align: start;
+}
+
