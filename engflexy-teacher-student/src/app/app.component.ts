@@ -1,23 +1,19 @@
-import {Component} from '@angular/core';
-import {LayoutService} from "./layout/layout.service";
-import {NbSidebarState} from "@nebular/theme";
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector   : 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls  : ['./app.component.scss'],
+    standalone : true,
+    imports    : [RouterOutlet],
 })
-export class AppComponent {
-  is_dark: boolean = false;
-
-  constructor(private layout: LayoutService) {
-  }
-
-  get state(): NbSidebarState {
-    return this.layout.state;
-  }
-
-  set state(value: NbSidebarState) {
-    this.layout.state = value;
-  }
+export class AppComponent
+{
+    /**
+     * Constructor
+     */
+    constructor()
+    {
+    }
 }
