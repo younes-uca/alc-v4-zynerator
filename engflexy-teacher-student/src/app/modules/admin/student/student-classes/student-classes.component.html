@@ -1,73 +1,256 @@
-<div class="flex flex-row flex-wrap">
-    <div class="max-w-[360px] mr-5 mx-auto">
-        <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg mt-9">
-            <!-- Card header -->
-            <header class="text-center px-5 pb-5">
-                <!-- Avatar -->
-                <div
-                    class="inline-flex dark:bg-white bg-gray-700 -mt-9 w-[72px] h-[72px]
-                fill-current rounded-full items-center
-                border-4 border-white dark:border-gray-900 box-content
-                 shadow mb-3">
-                    <mat-icon class="w-12 ml-2.5 h-12 text-orange-500"
-                              svgIcon="heroicons_solid:book-open"></mat-icon>
-                </div>
+<div class="block">
+    <div
+        class=" inset-0 flex flex-col min-w-0 overflow-y-auto"
+        cdkScrollable>
+        <div class="z-10 flex justify-between flex-wrap relative p-4">
+            <h2 class="text-xl font-semibold">Next Lesson📅</h2>
+            <button class="text-gray-600"
+                    mat-flat-button
+                    [color]="'primary'">
+                <span class="ml-2 mr-1">JOIN NOW</span>
+                <mat-icon [svgIcon]="'heroicons_outline:arrow-right'"></mat-icon>
 
-
-                <!-- Card name -->
-                <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-1">All Lessons</h3>
-                <div class="text-sm font-medium dark:text-gray-200 text-gray-500">50</div>
-            </header>
+            </button>
         </div>
-    </div>
-    <div class="max-w-[360px] mr-5 mx-auto">
-        <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg mt-9">
-            <!-- Card header -->
-            <header class="text-center px-5 pb-5">
-                <!-- Avatar -->
-                <div
-                    class="inline-flex dark:bg-white bg-gray-700 -mt-9 w-[72px] h-[72px]
-                fill-current rounded-full items-center
-                border-4 border-white dark:border-gray-900 box-content
-                 shadow mb-3">
-                    <mat-icon class="w-12 ml-2.5 h-12 text-orange-500"
-                              svgIcon="heroicons_solid:lock-open"></mat-icon>
-                </div>
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <div class="bg-gradient-to-r from-orange-300 from-10% via-orange-200 via-30% to-orange-400 to-90%
+    shadow overflow-hidden sm:rounded-md">
+            <ul role="list" class="divide-y divide-gray-200">
+                <li>
+                    <a href="#" class="block hover:bg-orange-400">
+                        <div class="px-4 py-4 sm:px-6">
+                            <div class="flex items-center justify-between">
+                                <p class="text-lg font-bold text-black  truncate">Intro lesson</p>
+                                <div class="ml-2 flex-shrink-0 flex">
+                                    <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        individual</p>
+                                </div>
+                            </div>
+                            <div class="mt-2 sm:flex sm:justify-between">
+                                <div class="sm:flex">
+                                    <p class="flex items-center text-sm text-gray-600">
+                                        <!-- Heroicon name: solid/users -->
+                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-600"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                             aria-hidden="true">
+                                            <path
+                                                d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                                        </svg>
+                                        Tasnim/Nadia Hamsassia
+                                    </p>
 
+                                    <p class="mt-2 flex items-center text-sm text-gray-600 sm:mt-0 sm:ml-6">
+                                        <!-- Heroicon name: solid/location-marker -->
+                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-600"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"
+                                             fill="currentColor"
+                                             aria-hidden="true">
+                                            <path
+                                                d="M208 352c-2.39 0-4.78.35-7.06 1.09C187.98 357.3 174.35 360 160 360c-14.35 0-27.98-2.7-40.95-6.91-2.28-.74-4.66-1.09-7.05-1.09C49.94 352-.33 402.48 0 464.62.14 490.88 21.73 512 48 512h224c26.27 0 47.86-21.12 48-47.38.33-62.14-49.94-112.62-112-112.62zm-48-32c53.02 0 96-42.98 96-96s-42.98-96-96-96-96 42.98-96 96 42.98 96 96 96zM592 0H208c-26.47 0-48 22.25-48 49.59V96c23.42 0 45.1 6.78 64 17.8V64h352v288h-64v-64H384v64h-76.24c19.1 16.69 33.12 38.73 39.69 64H592c26.47 0 48-22.25 48-49.59V49.59C640 22.25 618.47 0 592 0z"/>
 
-                <!-- Card name -->
-                <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-1">Completed Lessons</h3>
-                <div class="text-sm font-medium dark:text-gray-200 text-gray-500">20</div>
-            </header>
+                                        </svg>
+                                        Kamal Zouani
+                                    </p>
+                                </div>
+                                <div class="mt-2 flex items-center text-sm text-gray-600 sm:mt-0">
+                                    <!-- Heroicon name: solid/calendar -->
+                                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-600"
+                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                         aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                    <p>
+                                        Opening on
+                                        <time datetime="2020-01-14">January 14, 2023 14:00</time>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
         </div>
-    </div>
-    <div class="max-w-[360px] mr-5 mx-auto">
-        <div class="bg-white dark:bg-gray-700 shadow-lg rounded-lg mt-9">
-            <!-- Card header -->
-            <header class="text-center px-5 pb-5">
-                <!-- Avatar -->
-                <div
-                    class="inline-flex dark:bg-white bg-gray-700 -mt-9 w-[72px] h-[72px]
-                fill-current rounded-full items-center
-                border-4 border-white dark:border-gray-900 box-content
-                 shadow mb-3">
-                    <mat-icon class="w-12 ml-2.5 h-12 text-orange-500"
-                              svgIcon="heroicons_solid:lock-closed"></mat-icon>
+
+        <div class="w-full h-1 my-6 border-t-2"></div>
+
+        <!-- Main -->
+        <div class="flex flex-auto p-6 sm:p-10">
+
+            <div class="flex flex-col flex-auto w-full max-w-xs sm:max-w-5xl mx-auto">
+                <!-- Filters -->
+                <div class="flex flex-col sm:flex-row items-center justify-between w-full max-w-xs sm:max-w-none">
+                    <mat-form-field
+                        class="w-full sm:w-36"
+                        [subscriptSizing]="'dynamic'">
+                        <mat-select
+                            [value]="'all'">
+                            <mat-option [value]="'all'">All</mat-option>
+                            <ng-container>
+                                <mat-option [value]="null">Completed</mat-option>
+                                <mat-option [value]="null">Coming</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-full sm:w-72 mt-4 sm:mt-0 sm:ml-4"
+                        [subscriptSizing]="'dynamic'">
+                        <mat-icon
+                            matPrefix
+                            class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:magnifying-glass'"></mat-icon>
+                        <input
+                            placeholder="Search by title or description"
+                            matInput
+                            #query>
+                    </mat-form-field>
+                    <mat-slide-toggle
+                        class="mt-8 sm:mt-0 sm:ml-auto"
+                        [color]="'primary'">
+                        Hide completed
+                    </mat-slide-toggle>
                 </div>
+                <!-- Courses -->
+                <ng-container *ngIf="showLessons">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 sm:mt-10">
+                        <ng-container>
+                            <!-- Course -->
+                            <div class="flex flex-col h-full shadow rounded-2xl overflow-hidden bg-card">
+                                <div class="flex flex-col p-6">
+                                    <div class="flex items-center justify-between">
+                                        <!-- Course category -->
+                                        <ng-container>
+                                            <div
+                                                class="py-0.5 px-3 rounded-full text-sm font-semibold"
+                                                [ngClass]="{'text-blue-800 bg-blue-100 dark:text-blue-50 dark:bg-blue-500': category === 'ELEMENTARY',
+                                                        'text-green-800 bg-green-100 dark:text-green-50 dark:bg-green-500': category === 'android',
+                                                        'text-pink-800 bg-pink-100 dark:text-pink-50 dark:bg-pink-500': category === 'cloud',
+                                                        'text-amber-800 bg-amber-100 dark:text-amber-50 dark:bg-amber-500': category === 'firebase'}">
+                                                ELEMENTARY
+                                            </div>
+                                        </ng-container>
+                                        <!-- Completed at least once -->
+                                        <div class="flex items-center">
+                                            <ng-container>
+                                                <mat-icon
+                                                    class="icon-size-5 text-green-600"
+                                                    [svgIcon]="'heroicons_solid:check-badge'"
+                                                    [matTooltip]="'You completed this course'"></mat-icon>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                    <!-- Course title & description -->
+                                    <div class="mt-4 text-lg font-medium">Intro lesson</div>
+
+                                    <div class="mt-0.5 line-clamp-2 text-secondary">👨‍⚖️ Teacher <span
+                                        class="font-bold">Kamal Zouani</span>
+                                    </div>
+                                    <div class="mt-0.5 line-clamp-2 text-secondary">👨‍🎓 Group <span class="font-bold"> Tasnim/Nadia Hamsassia </span>
+                                    </div>
+
+                                    <div class="w-12 h-1 my-6 border-t-2"></div>
+                                    <!-- Course time -->
+                                    <div class="flex items-center leading-5 text-md text-secondary">
+                                        <mat-icon
+                                            class="icon-size-5 text-hint"
+                                            [svgIcon]="'heroicons_solid:clock'"></mat-icon>
+                                        <div class="ml-1.5">60 minutes</div>
+                                    </div>
+
+                                    <!-- Key sections completion -->
+                                    <div class="flex items-center mt-2 leading-5 text-md text-secondary">
+                                        <mat-icon matTooltip=" Key sections"
+                                                  class="icon-size-5 text-hint" svgIcon="bookmark_added"></mat-icon>
+                                        <ng-container>
+                                            <div class="ml-1.5">6 of 6 completed</div>
+                                        </ng-container>
+                                    </div>
+
+                                    <!-- Additional sections completion -->
+                                    <div class="flex items-center mt-2 leading-5 text-md text-secondary">
+                                        <mat-icon matTooltip=" Additional sections"
+                                                  class="icon-size-5 text-hint" svgIcon="bookmark_add"></mat-icon>
+                                        <ng-container>
+                                            <div class="ml-1.5">1 of 2 completed</div>
+                                        </ng-container>
+                                    </div>
+                                    <!-- dictionary completion -->
+                                    <div class="flex items-center mt-2 leading-5 text-md text-secondary">
+                                        <mat-icon matTooltip="dictionary"
+                                                  class="icon-size-5 text-hint"
+                                                  svgIcon="collections_bookmark"></mat-icon>
+                                        <ng-container>
+                                            <div class="ml-1.5">12 words added</div>
+                                        </ng-container>
+                                    </div>
+
+                                    <!-- homework completion -->
+                                    <div class="flex items-center mt-2 leading-5 text-md text-secondary">
+                                        <mat-icon matTooltip="dictionary"
+                                                  class="icon-size-5 text-hint"
+                                                  svgIcon="collections_bookmark"></mat-icon>
+                                        <ng-container>
+                                            <div class="ml-1.5">completed</div>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+                                <!-- Footer -->
+                                <div class="flex flex-col w-full mt-auto">
+                                    <!-- Course progress -->
+                                    <div class="relative h-0.5">
+                                        <div
+                                            class="z-10 absolute inset-x-0 h-6 -mt-3"
+                                            [matTooltip]="30/100 | percent"
+                                            [matTooltipPosition]="'above'"
+                                            [matTooltipClass]="'-mb-0.5'"></div>
+                                        <mat-progress-bar
+                                            class="h-0.5"
+                                            [value]="30"></mat-progress-bar>
+                                    </div>
+
+                                    <!-- Course launch button -->
+                                    <div class="px-6 py-4 text-right bg-gray-50 dark:bg-transparent">
+                                        <a
+                                            mat-stroked-button>
+                                        <span class="inline-flex items-center">
+
+                                            <!-- Not started -->
+                                            <ng-container>
+
+                                                <!-- Completed before -->
+                                                <ng-container>
+                                                    <span>join class</span>
+                                                </ng-container>
+                                            </ng-container>
 
 
-                <!-- Card name -->
-                <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-1">Coming Lessons</h3>
-                <div class="text-sm font-medium dark:text-gray-200 text-gray-500">30</div>
-            </header>
+                                            <mat-icon
+                                                class="ml-1.5 icon-size-5"
+                                                [svgIcon]="'heroicons_solid:arrow-small-right'"></mat-icon>
+                                        </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+
+                <!-- No courses -->
+                <ng-template #noCourses>
+                    <div class="flex flex-auto flex-col items-center justify-center bg-gray-100 dark:bg-transparent">
+                        <mat-icon
+                            class="icon-size-24"
+                            [svgIcon]="'heroicons_outline:document-search'"></mat-icon>
+                        <div class="mt-6 text-2xl font-semibold tracking-tight text-secondary">No courses found!</div>
+                    </div>
+                </ng-template>
+            </div>
+
         </div>
+
     </div>
-
-
-
-
 </div>
-
-
-
 

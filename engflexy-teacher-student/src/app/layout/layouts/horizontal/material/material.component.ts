@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import {NgIf, NgOptimizedImage} from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,7 +22,7 @@ import { Subject, takeUntil } from 'rxjs';
     templateUrl  : './material.component.html',
     encapsulation: ViewEncapsulation.None,
     standalone   : true,
-    imports      : [FuseLoadingBarComponent, NgIf, FuseVerticalNavigationComponent, MatButtonModule, MatIconModule, LanguagesComponent, FuseFullscreenComponent, SearchComponent, ShortcutsComponent, MessagesComponent, NotificationsComponent, UserComponent, FuseHorizontalNavigationComponent, RouterOutlet],
+    imports: [FuseLoadingBarComponent, NgIf, FuseVerticalNavigationComponent, MatButtonModule, MatIconModule, LanguagesComponent, FuseFullscreenComponent, SearchComponent, ShortcutsComponent, MessagesComponent, NotificationsComponent, UserComponent, FuseHorizontalNavigationComponent, RouterOutlet, NgOptimizedImage],
 })
 export class MaterialLayoutComponent implements OnInit, OnDestroy
 {
