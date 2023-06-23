@@ -8,6 +8,7 @@ import {environment} from "../../../environments/environment";
 @Injectable({providedIn: 'root'})
 export class AuthService {
     private _authenticated: boolean = false;
+    public _user = null;
     public host = environment.AUTH_URL;
 
     /**
@@ -99,7 +100,6 @@ export class AuthService {
                 of(false),
             ),
             switchMap((response: any) => {
-                console.log(response)
                 // Replace the access token with the new one if it's available on
                 // the response object.
                 //
@@ -116,6 +116,7 @@ export class AuthService {
 
                 // Store the user on the user service
                 this._userService.user = response;
+                this._user = response;
 
                 // Return true
                 return of(true);
@@ -158,7 +159,7 @@ export class AuthService {
     /**
      * Check the authentication status
      */
-    check(): Observable<boolean> {
+    check(): Observable<any> {
         // Check if the user is logged in
         if (this._authenticated) {
             return of(true);
@@ -177,4 +178,5 @@ export class AuthService {
         // If the access token exists, and it didn't expire, sign in using it
         return this.signInUsingToken();
     }
+
 }
