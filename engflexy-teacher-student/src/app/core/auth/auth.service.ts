@@ -81,7 +81,7 @@ export class AuthService {
                 this._userService.user = response.body.token;
 
                 // Return a new observable with the response
-                return of(response);
+                return of(response.body);
             }),
         );
     }
