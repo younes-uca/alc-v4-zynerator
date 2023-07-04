@@ -1,4 +1,4 @@
-package  ma.zsmart.engflexy.ws.facade.admin;
+package ma.zsmart.engflexy.ws.facade.admin;
 
 
 import io.swagger.annotations.Api;
@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import ma.zsmart.engflexy.zynerator.process.Result;
 
@@ -28,7 +29,7 @@ import ma.zsmart.engflexy.zynerator.dto.FileTempDto;
 @Api("Manages cours services")
 @RestController
 @RequestMapping("/api/admin/cours/")
-public class CoursRestAdmin  extends AbstractController<Cours, CoursDto, CoursHistory, CoursCriteria, CoursHistoryCriteria, CoursAdminService, CoursConverter> {
+public class CoursRestAdmin extends AbstractController<Cours, CoursDto, CoursHistory, CoursCriteria, CoursHistoryCriteria, CoursAdminService, CoursConverter> {
 
 
     @ApiOperation("upload one cours")
@@ -36,6 +37,7 @@ public class CoursRestAdmin  extends AbstractController<Cours, CoursDto, CoursHi
     public ResponseEntity<FileTempDto> uploadFileAndGetChecksum(@RequestBody MultipartFile file) throws Exception {
         return super.uploadFileAndGetChecksum(file);
     }
+
     @ApiOperation("upload multiple courss")
     @RequestMapping(value = "upload-multiple", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<List<FileTempDto>> uploadMultipleFileAndGetChecksum(@RequestBody MultipartFile[] files) throws Exception {
@@ -59,6 +61,7 @@ public class CoursRestAdmin  extends AbstractController<Cours, CoursDto, CoursHi
     public ResponseEntity<CoursDto> findById(@PathVariable Long id, String[] includes, String[] excludes) throws Exception {
         return super.findById(id, includes, excludes);
     }
+
     @ApiOperation("Saves the specified  cours")
     @PostMapping("")
     public ResponseEntity<CoursDto> save(@RequestBody CoursDto dto) throws Exception {
@@ -72,14 +75,15 @@ public class CoursRestAdmin  extends AbstractController<Cours, CoursDto, CoursHi
     }
 
     @ApiOperation("Delete list of cours")
-    @PostMapping("multiple")
+    @DeleteMapping("multiple")
     public ResponseEntity<List<CoursDto>> delete(@RequestBody List<CoursDto> listToDelete) throws Exception {
         return super.delete(listToDelete);
     }
+
     @ApiOperation("Delete the specified cours")
     @DeleteMapping("")
     public ResponseEntity<CoursDto> delete(@RequestBody CoursDto dto) throws Exception {
-            return super.delete(dto);
+        return super.delete(dto);
     }
 
     @ApiOperation("Delete the specified cours")
@@ -87,33 +91,38 @@ public class CoursRestAdmin  extends AbstractController<Cours, CoursDto, CoursHi
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         return super.deleteById(id);
     }
+
     @ApiOperation("Delete multiple courss by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
-            return super.deleteByIdIn(ids);
-     }
+        return super.deleteByIdIn(ids);
+    }
 
 
     @ApiOperation("find by etatCours id")
     @GetMapping("etatCours/id/{id}")
-    public List<Cours> findByEtatCoursId(@PathVariable Long id){
-        return service.findByEtatCoursId(id);
+    public ResponseEntity<List<CoursDto>> findByEtatCoursId(@PathVariable Long id) {
+        return super.findListByChildId(service::findByEtatCoursId, id);
     }
+
     @ApiOperation("delete by etatCours id")
     @DeleteMapping("etatCours/id/{id}")
-    public int deleteByEtatCoursId(@PathVariable Long id){
+    public int deleteByEtatCoursId(@PathVariable Long id) {
         return service.deleteByEtatCoursId(id);
     }
+
     @ApiOperation("find by parcours id")
     @GetMapping("parcours/id/{id}")
-    public List<Cours> findByParcoursId(@PathVariable Long id){
-        return service.findByParcoursId(id);
+    public ResponseEntity<List<CoursDto>> findByParcoursId(@PathVariable Long id) {
+        return super.findListByChildId(service::findByParcoursId, id);
     }
+
     @ApiOperation("delete by parcours id")
     @DeleteMapping("parcours/id/{id}")
-    public int deleteByParcoursId(@PathVariable Long id){
+    public int deleteByParcoursId(@PathVariable Long id) {
         return service.deleteByParcoursId(id);
     }
+
     @ApiOperation("Finds a cours and associated list by id")
     @GetMapping("detail/id/{id}")
     public ResponseEntity<CoursDto> findWithAssociatedLists(@PathVariable Long id) {
@@ -167,9 +176,8 @@ public class CoursRestAdmin  extends AbstractController<Cours, CoursDto, CoursHi
     public ResponseEntity<Integer> getHistoryDataSize(@RequestBody CoursHistoryCriteria criteria) throws Exception {
         return super.getHistoryDataSize(criteria);
     }
-    public CoursRestAdmin (CoursAdminService service, CoursConverter converter) {
+
+    public CoursRestAdmin(CoursAdminService service, CoursConverter converter) {
         super(service, converter);
     }
-
-
 }
