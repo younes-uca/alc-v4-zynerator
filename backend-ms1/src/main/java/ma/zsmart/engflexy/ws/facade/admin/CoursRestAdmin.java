@@ -75,7 +75,7 @@ public class CoursRestAdmin extends AbstractController<Cours, CoursDto, CoursHis
     }
 
     @ApiOperation("Delete list of cours")
-    @DeleteMapping("multiple")
+    @PostMapping("multiple")
     public ResponseEntity<List<CoursDto>> delete(@RequestBody List<CoursDto> listToDelete) throws Exception {
         return super.delete(listToDelete);
     }

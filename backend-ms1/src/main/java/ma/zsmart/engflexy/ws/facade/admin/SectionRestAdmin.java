@@ -69,7 +69,7 @@ public class SectionRestAdmin extends AbstractController<Section, SectionDto, Se
     }
 
     @ApiOperation("Delete list of section")
-    @DeleteMapping("multiple")
+    @PostMapping("multiple")
     public ResponseEntity<List<SectionDto>> delete(@RequestBody List<SectionDto> listToDelete) throws Exception {
         return super.delete(listToDelete);
     }
