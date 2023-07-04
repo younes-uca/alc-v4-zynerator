@@ -48,8 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/actuator/health").permitAll();
         http.authorizeRequests().antMatchers("/actuator/info").permitAll();
 
-            http.authorizeRequests().antMatchers("/api/admin/login").permitAll();
-            http.authorizeRequests().antMatchers("/api/admin/").hasAnyAuthority(AuthoritiesConstants.ADMIN);
+        http.authorizeRequests().antMatchers("/api/admin/login").permitAll();
+        http.authorizeRequests().antMatchers("/api/admin/").hasAnyAuthority(AuthoritiesConstants.ADMIN);
 
         // http.authorizeRequests().anyRequest().authenticated();
 

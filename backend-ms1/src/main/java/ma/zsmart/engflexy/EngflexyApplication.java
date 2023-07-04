@@ -58,8 +58,7 @@ public class EngflexyApplication {
     @Bean
     public CommandLineRunner demo(UserService userService, RoleService roleService) {
     return (args) -> {
-        if(false){
-
+        if(false) {
             createTypeTeacher();
             createGroupeEtude();
             createEtudiantClassRoom();
@@ -1404,7 +1403,7 @@ public class EngflexyApplication {
     }
 
     private static Long fakeLong(String attributeName, int i) {
-        return  10L * i;
+        return (10L * i);
     }
     private static Integer fakeInteger(String attributeName, int i) {
         return  10 * i;

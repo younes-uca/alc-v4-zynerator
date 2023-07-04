@@ -11,6 +11,7 @@ import ma.zsmart.engflexy.service.facade.admin.SectionAdminService;
 import ma.zsmart.engflexy.zynerator.service.AbstractServiceImpl;
 import ma.zsmart.engflexy.zynerator.util.ListUtil;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 
@@ -20,88 +21,94 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ma.zsmart.engflexy.bean.core.SectionItem;
 
-import ma.zsmart.engflexy.service.facade.admin.CoursAdminService ;
-import ma.zsmart.engflexy.service.facade.admin.SectionItemAdminService ;
-import ma.zsmart.engflexy.service.facade.admin.SessionCoursAdminService ;
-import ma.zsmart.engflexy.service.facade.admin.CategorieSectionAdminService ;
+import ma.zsmart.engflexy.service.facade.admin.CoursAdminService;
+import ma.zsmart.engflexy.service.facade.admin.SectionItemAdminService;
+import ma.zsmart.engflexy.service.facade.admin.SessionCoursAdminService;
+import ma.zsmart.engflexy.service.facade.admin.CategorieSectionAdminService;
 
 
 import java.util.List;
+
 @Service
-public class SectionAdminServiceImpl extends AbstractServiceImpl<Section,SectionHistory, SectionCriteria, SectionHistoryCriteria, SectionDao,
-SectionHistoryDao> implements SectionAdminService {
+public class SectionAdminServiceImpl extends AbstractServiceImpl<Section, SectionHistory, SectionCriteria, SectionHistoryCriteria, SectionDao,
+        SectionHistoryDao> implements SectionAdminService {
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public Section create(Section t) {
         super.create(t);
         if (t.getSectionItems() != null) {
-                t.getSectionItems().forEach(element-> {
-                    element.setSection(t);
-                    sectionItemService.create(element);
+            t.getSectionItems().forEach(element -> {
+                element.setSection(t);
+                sectionItemService.create(element);
             });
         }
         return t;
     }
 
-    public Section findWithAssociatedLists(Long id){
+    public Section findWithAssociatedLists(Long id) {
         Section result = dao.findById(id).orElse(null);
-        if(result!=null && result.getId() != null) {
+        if (result != null && result.getId() != null) {
             result.setSectionItems(sectionItemService.findBySectionId(id));
         }
         return result;
     }
+
     @Transactional
     public void deleteAssociatedLists(Long id) {
         sectionItemService.deleteBySectionId(id);
     }
 
 
-    public void updateWithAssociatedLists(Section section){
-    if(section !=null && section.getId() != null){
-            List<List<SectionItem>> resultSectionItems= sectionItemService.getToBeSavedAndToBeDeleted(sectionItemService.findBySectionId(section.getId()),section.getSectionItems());
+    public void updateWithAssociatedLists(Section section) {
+        if (section != null && section.getId() != null) {
+            List<List<SectionItem>> resultSectionItems = sectionItemService.getToBeSavedAndToBeDeleted(sectionItemService.findBySectionId(section.getId()), section.getSectionItems());
             sectionItemService.delete(resultSectionItems.get(1));
             ListUtil.emptyIfNull(resultSectionItems.get(0)).forEach(e -> e.setSection(section));
-            sectionItemService.update(resultSectionItems.get(0),true);
-    }
-    }
-
-    public Section findByReferenceEntity(Section t){
-        return  dao.findByCode(t.getCode());
+            sectionItemService.update(resultSectionItems.get(0), true);
+        }
     }
 
-    public List<Section> findByCategorieSectionId(Long id){
+    public Section findByReferenceEntity(Section t) {
+        return dao.findByCode(t.getCode());
+    }
+
+    public List<Section> findByCategorieSectionId(Long id) {
         return dao.findByCategorieSectionId(id);
     }
-    public int deleteByCategorieSectionId(Long id){
+
+    public int deleteByCategorieSectionId(Long id) {
         return dao.deleteByCategorieSectionId(id);
     }
-    public List<Section> findByCoursId(Long id){
+
+    public List<Section> findByCoursId(Long id) {
         return dao.findByCoursId(id);
     }
-    public int deleteByCoursId(Long id){
+
+    public int deleteByCoursId(Long id) {
         return dao.deleteByCoursId(id);
     }
-    public List<Section> findBySessionCoursId(Long id){
+
+    public List<Section> findBySessionCoursId(Long id) {
         return dao.findBySessionCoursId(id);
     }
-    public int deleteBySessionCoursId(Long id){
+
+    public int deleteBySessionCoursId(Long id) {
         return dao.deleteBySessionCoursId(id);
     }
 
 
-
     public void configure() {
-        super.configure(Section.class,SectionHistory.class, SectionHistoryCriteria.class, SectionSpecification.class);
+        super.configure(Section.class, SectionHistory.class, SectionHistoryCriteria.class, SectionSpecification.class);
     }
 
     @Autowired
-    private CoursAdminService coursService ;
+    private CoursAdminService coursService;
     @Autowired
-    private SectionItemAdminService sectionItemService ;
+    private SectionItemAdminService sectionItemService;
     @Autowired
-    private SessionCoursAdminService sessionCoursService ;
+    private SessionCoursAdminService sessionCoursService;
     @Autowired
-    private CategorieSectionAdminService categorieSectionService ;
+    private CategorieSectionAdminService categorieSectionService;
 
     public SectionAdminServiceImpl(SectionDao dao, SectionHistoryDao historyDao) {
         super(dao, historyDao);

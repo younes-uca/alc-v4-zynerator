@@ -125,7 +125,7 @@ public class AuditBusinessObject extends BusinessObject {
     /**
      * updated user
      *
-     * @param UpdatedBy
+     * @param updatedBy
      */
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
