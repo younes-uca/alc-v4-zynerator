@@ -68,6 +68,8 @@ public class SectionConverter extends AbstractConverter<Section, SectionDto, Sec
                 item.setUrl(dto.getUrl());
             if (StringUtil.isNotEmpty(dto.getContent()))
                 item.setContent(dto.getContent());
+            if (dto.getStatus() != null)
+                item.setStatus(dto.getStatus());
             if (dto.getCategorieSection() != null && dto.getCategorieSection().getId() != null) {
                 item.setCategorieSection(new CategorieSection());
                 item.getCategorieSection().setId(dto.getCategorieSection().getId());
@@ -123,6 +125,8 @@ public class SectionConverter extends AbstractConverter<Section, SectionDto, Sec
                 dto.setUrl(item.getUrl());
             if (StringUtil.isNotEmpty(item.getContent()))
                 dto.setContent(item.getContent());
+            if (item.getStatus() != null)
+                dto.setStatus(item.getStatus());
             if (this.categorieSection && item.getCategorieSection() != null) {
                 categorieSectionConverter.setSections(false);
                 dto.setCategorieSection(categorieSectionConverter.toDto(item.getCategorieSection()));

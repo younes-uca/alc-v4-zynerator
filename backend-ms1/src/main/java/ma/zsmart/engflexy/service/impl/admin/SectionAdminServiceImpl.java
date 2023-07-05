@@ -35,6 +35,7 @@ public class SectionAdminServiceImpl extends AbstractServiceImpl<Section, Sectio
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public Section create(Section t) {
+        t.setStatus();
         super.create(t);
         if (t.getSectionItems() != null) {
             t.getSectionItems().forEach(element -> {
@@ -58,9 +59,10 @@ public class SectionAdminServiceImpl extends AbstractServiceImpl<Section, Sectio
         sectionItemService.deleteBySectionId(id);
     }
 
-
     public void updateWithAssociatedLists(Section section) {
         if (section != null && section.getId() != null) {
+            section.setStatus();
+
             List<List<SectionItem>> resultSectionItems = sectionItemService.getToBeSavedAndToBeDeleted(sectionItemService.findBySectionId(section.getId()), section.getSectionItems());
             sectionItemService.delete(resultSectionItems.get(1));
             ListUtil.emptyIfNull(resultSectionItems.get(0)).forEach(e -> e.setSection(section));
