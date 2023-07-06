@@ -1,9 +1,10 @@
 package ma.zsmart.engflexy.zynerator.enumeration;
 
 public enum SectionStatus {
-        VALID("VALID"),
+        VALIDATE("VALIDATE"),
         CONTENU_MESSING("CONTENU_MESSING"),
-        MEDIA_MESSING("MEDIA_MESSING");
+        MEDIA_MESSING("MEDIA_MESSING"),
+        PENDING("PENDING");
 
         private final String value;
 
@@ -13,5 +14,14 @@ public enum SectionStatus {
 
         public String getValue() {
                 return value;
+        }
+
+        public String tostring() {
+                return value.replace('_', ' ');
+        }
+
+        public static SectionStatus toEnum(String status) {
+                status = status.toUpperCase().replace(' ', '_');
+                return SectionStatus.valueOf(status);
         }
 }

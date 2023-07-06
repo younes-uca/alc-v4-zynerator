@@ -55,7 +55,7 @@ export class AbstractCreateController<DTO extends BaseDto, CRITERIA extends Base
     public saveWithShowOption(showList: boolean) {
         this.service.save().subscribe(item => {
             if (item != null) {
-                this.items.push({...item});
+                this.items.unshift({...item});
                 this.createDialog = false;
                 this.submitted = false;
                 this.item = this.service.constrcutDto();

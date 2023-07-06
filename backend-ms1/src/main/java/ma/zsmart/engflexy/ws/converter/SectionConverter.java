@@ -1,5 +1,6 @@
 package ma.zsmart.engflexy.ws.converter;
 
+import ma.zsmart.engflexy.zynerator.enumeration.SectionStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ma.zsmart.engflexy.zynerator.util.ListUtil;
@@ -69,7 +70,7 @@ public class SectionConverter extends AbstractConverter<Section, SectionDto, Sec
             if (StringUtil.isNotEmpty(dto.getContent()))
                 item.setContent(dto.getContent());
             if (dto.getStatus() != null)
-                item.setStatus(dto.getStatus());
+                item.setStatus(SectionStatus.toEnum(dto.getStatus()));
             if (dto.getCategorieSection() != null && dto.getCategorieSection().getId() != null) {
                 item.setCategorieSection(new CategorieSection());
                 item.getCategorieSection().setId(dto.getCategorieSection().getId());
@@ -126,7 +127,7 @@ public class SectionConverter extends AbstractConverter<Section, SectionDto, Sec
             if (StringUtil.isNotEmpty(item.getContent()))
                 dto.setContent(item.getContent());
             if (item.getStatus() != null)
-                dto.setStatus(item.getStatus());
+                dto.setStatus(item.getStatus().tostring());
             if (this.categorieSection && item.getCategorieSection() != null) {
                 categorieSectionConverter.setSections(false);
                 dto.setCategorieSection(categorieSectionConverter.toDto(item.getCategorieSection()));

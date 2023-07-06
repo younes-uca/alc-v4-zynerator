@@ -209,7 +209,7 @@ public class Section extends AuditBusinessObject {
     }
 
     public void setStatus() {
-        this.status = SectionStatus.VALID;
+        this.status = SectionStatus.VALIDATE;
         if (StringUtil.isEmpty(this.contenu)) {
             this.status = SectionStatus.CONTENU_MESSING;
         } else if (StringUtil.isEmpty(this.urlImage) && StringUtil.isEmpty(this.urlVideo)) {

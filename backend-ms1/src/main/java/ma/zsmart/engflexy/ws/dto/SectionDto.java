@@ -23,7 +23,7 @@ public class SectionDto extends AuditBaseDto {
     private Integer numeroOrder = 0;
     private Integer url = 0;
     private Integer content = 0;
-    private SectionStatus status;
+    private String status;
 
     private CategorieSectionDto categorieSection;
     private CoursDto cours;
@@ -179,11 +179,11 @@ public class SectionDto extends AuditBaseDto {
         this.sectionItems = sectionItems;
     }
 
-    public SectionStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(SectionStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

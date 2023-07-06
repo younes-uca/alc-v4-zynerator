@@ -241,3 +241,75 @@ $gutter: 1rem; //for primeflex grid system
 
 }
 
+$clr-black: #000;
+$clr-white: #fff;
+$clr-primary: #0011FF;
+$clr-green: #3b8b00;
+$clr-purple: #2200AE;
+$clr-blue: #2233D4;
+$clr-red: #D42240;
+$clr-orange: orange;
+
+$status-clr: (
+        'VALIDATE': $clr-green,
+        'MEDIA.MESSING': $clr-purple,
+        'CONTENU.MESSING': $clr-blue,
+        'PENDING':  $clr-orange,
+);
+
+$buttons-clr: (
+        'red': $clr-red,
+        'blue': $clr-blue,
+        'green': $clr-orange,
+        'orange': $clr-green
+);
+
+table {
+  .status {
+    text-align: center !important;
+
+    span {
+      max-width: 130px;
+      padding: 2px 5px;
+      border-radius: 5px;
+      white-space: nowrap;
+      text-transform: uppercase;
+      font-weight: 400;
+      text-align: center;
+
+      @each $cls, $clr in $status-clr {
+        &.#{$cls} {
+          color: $clr;
+          background: rgba($clr, .2);
+        }
+      }
+    }
+  }
+
+  .buttons {
+    text-align: center !important;
+
+    button {
+      padding: 3px 15px;
+      border-radius: 40px;
+      white-space: nowrap;
+      text-transform: capitalize;
+      border: 1px solid transparent;
+      color: $clr-white;
+      transition: .3s;
+      cursor: pointer;
+
+      @each $class, $color in $buttons-clr {
+        &.#{$class} {
+          background: $color;
+
+          &:hover {
+            color: $color;
+            border-color: $color;
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+}
