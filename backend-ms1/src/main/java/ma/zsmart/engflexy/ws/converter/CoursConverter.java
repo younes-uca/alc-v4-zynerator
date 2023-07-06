@@ -1,4 +1,4 @@
-package  ma.zsmart.engflexy.ws.converter;
+package ma.zsmart.engflexy.ws.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,32 +16,22 @@ import ma.zsmart.engflexy.ws.dto.CoursDto;
 @Component
 public class CoursConverter extends AbstractConverter<Cours, CoursDto, CoursHistory> {
 
-    @Autowired
-    private HomeWorkQuestionConverter homeWorkQuestionConverter ;
-    @Autowired
-    private SessionCoursConverter sessionCoursConverter ;
-    @Autowired
-    private SectionConverter sectionConverter ;
-    @Autowired
-    private CategorieSectionConverter categorieSectionConverter ;
-    @Autowired
-    private ParcoursConverter parcoursConverter ;
-    @Autowired
-    private HomeWorkEtudiantConverter homeWorkEtudiantConverter ;
-    @Autowired
-    private HomeWorkConverter homeWorkConverter ;
-    @Autowired
-    private EtatCoursConverter etatCoursConverter ;
-    @Autowired
-    private SectionItemConverter sectionItemConverter ;
-    @Autowired
-    private TypeHomeWorkConverter typeHomeWorkConverter ;
+    @Autowired private HomeWorkQuestionConverter homeWorkQuestionConverter;
+    @Autowired private SessionCoursConverter sessionCoursConverter;
+    @Autowired private SectionConverter sectionConverter;
+    @Autowired private CategorieSectionConverter categorieSectionConverter;
+    @Autowired private ParcoursConverter parcoursConverter;
+    @Autowired private HomeWorkEtudiantConverter homeWorkEtudiantConverter;
+    @Autowired private HomeWorkConverter homeWorkConverter;
+    @Autowired private EtatCoursConverter etatCoursConverter;
+    @Autowired private SectionItemConverter sectionItemConverter;
+    @Autowired private TypeHomeWorkConverter typeHomeWorkConverter;
     private boolean etatCours;
     private boolean parcours;
     private boolean sections;
     private boolean homeWorks;
 
-    public  CoursConverter(){
+    public CoursConverter() {
         super(Cours.class, CoursDto.class, CoursHistory.class);
         init(true);
     }
@@ -51,42 +41,42 @@ public class CoursConverter extends AbstractConverter<Cours, CoursDto, CoursHist
         if (dto == null) {
             return null;
         } else {
-        Cours item = new Cours();
-            if(StringUtil.isNotEmpty(dto.getId()))
+            Cours item = new Cours();
+            if (StringUtil.isNotEmpty(dto.getId()))
                 item.setId(dto.getId());
-            if(StringUtil.isNotEmpty(dto.getCode()))
+            if (StringUtil.isNotEmpty(dto.getCode()))
                 item.setCode(dto.getCode());
-            if(StringUtil.isNotEmpty(dto.getLibelle()))
+            if (StringUtil.isNotEmpty(dto.getLibelle()))
                 item.setLibelle(dto.getLibelle());
-            if(StringUtil.isNotEmpty(dto.getDescription()))
+            if (StringUtil.isNotEmpty(dto.getDescription()))
                 item.setDescription(dto.getDescription());
-            if(StringUtil.isNotEmpty(dto.getImage()))
+            if (StringUtil.isNotEmpty(dto.getImage()))
                 item.setImage(dto.getImage());
-            if(StringUtil.isNotEmpty(dto.getNombreSectionFinalise()))
+            if (StringUtil.isNotEmpty(dto.getNombreSectionFinalise()))
                 item.setNombreSectionFinalise(dto.getNombreSectionFinalise());
-            if(StringUtil.isNotEmpty(dto.getNombreSectionEnCours()))
+            if (StringUtil.isNotEmpty(dto.getNombreSectionEnCours()))
                 item.setNombreSectionEnCours(dto.getNombreSectionEnCours());
-            if(StringUtil.isNotEmpty(dto.getNombreLinkEnCours()))
+            if (StringUtil.isNotEmpty(dto.getNombreLinkEnCours()))
                 item.setNombreLinkEnCours(dto.getNombreLinkEnCours());
-            if(StringUtil.isNotEmpty(dto.getNombreLinkFinalise()))
+            if (StringUtil.isNotEmpty(dto.getNombreLinkFinalise()))
                 item.setNombreLinkFinalise(dto.getNombreLinkFinalise());
-            if(StringUtil.isNotEmpty(dto.getNumeroOrder()))
+            if (StringUtil.isNotEmpty(dto.getNumeroOrder()))
                 item.setNumeroOrder(dto.getNumeroOrder());
-            if(this.etatCours && dto.getEtatCours()!=null)
-                item.setEtatCours(etatCoursConverter.toItem(dto.getEtatCours())) ;
+            if (this.etatCours && dto.getEtatCours() != null)
+                item.setEtatCours(etatCoursConverter.toItem(dto.getEtatCours()));
 
-            if(dto.getParcours() != null && dto.getParcours().getId() != null){
+            if (dto.getParcours() != null && dto.getParcours().getId() != null) {
                 item.setParcours(new Parcours());
                 item.getParcours().setId(dto.getParcours().getId());
             }
 
 
-            if(this.sections && ListUtil.isNotEmpty(dto.getSections()))
+            if (this.sections && ListUtil.isNotEmpty(dto.getSections()))
                 item.setSections(sectionConverter.toItem(dto.getSections()));
-            if(this.homeWorks && ListUtil.isNotEmpty(dto.getHomeWorks()))
+            if (this.homeWorks && ListUtil.isNotEmpty(dto.getHomeWorks()))
                 item.setHomeWorks(homeWorkConverter.toItem(dto.getHomeWorks()));
 
-        return item;
+            return item;
         }
     }
 
@@ -96,49 +86,50 @@ public class CoursConverter extends AbstractConverter<Cours, CoursDto, CoursHist
             return null;
         } else {
             CoursDto dto = new CoursDto();
-            if(StringUtil.isNotEmpty(item.getId()))
+            if (StringUtil.isNotEmpty(item.getId()))
                 dto.setId(item.getId());
-            if(StringUtil.isNotEmpty(item.getCode()))
+            if (StringUtil.isNotEmpty(item.getCode()))
                 dto.setCode(item.getCode());
-            if(StringUtil.isNotEmpty(item.getLibelle()))
+            if (StringUtil.isNotEmpty(item.getLibelle()))
                 dto.setLibelle(item.getLibelle());
-            if(StringUtil.isNotEmpty(item.getDescription()))
+            if (StringUtil.isNotEmpty(item.getDescription()))
                 dto.setDescription(item.getDescription());
-            if(StringUtil.isNotEmpty(item.getImage()))
+            if (StringUtil.isNotEmpty(item.getImage()))
                 dto.setImage(item.getImage());
-            if(StringUtil.isNotEmpty(item.getNombreSectionFinalise()))
+            if (StringUtil.isNotEmpty(item.getNombreSectionFinalise()))
                 dto.setNombreSectionFinalise(item.getNombreSectionFinalise());
-            if(StringUtil.isNotEmpty(item.getNombreSectionEnCours()))
+            if (StringUtil.isNotEmpty(item.getNombreSectionEnCours()))
                 dto.setNombreSectionEnCours(item.getNombreSectionEnCours());
-            if(StringUtil.isNotEmpty(item.getNombreLinkEnCours()))
+            if (StringUtil.isNotEmpty(item.getNombreLinkEnCours()))
                 dto.setNombreLinkEnCours(item.getNombreLinkEnCours());
-            if(StringUtil.isNotEmpty(item.getNombreLinkFinalise()))
+            if (StringUtil.isNotEmpty(item.getNombreLinkFinalise()))
                 dto.setNombreLinkFinalise(item.getNombreLinkFinalise());
-            if(StringUtil.isNotEmpty(item.getNumeroOrder()))
+            if (StringUtil.isNotEmpty(item.getNumeroOrder()))
                 dto.setNumeroOrder(item.getNumeroOrder());
-        if(this.etatCours && item.getEtatCours()!=null) {
-            dto.setEtatCours(etatCoursConverter.toDto(item.getEtatCours())) ;
-        }
-        if(this.parcours && item.getParcours()!=null) {
-            dto.setParcours(parcoursConverter.toDto(item.getParcours())) ;
-        }
-        if(this.sections && ListUtil.isNotEmpty(item.getSections())){
-            sectionConverter.init(true);
-            sectionConverter.setCours(false);
-            dto.setSections(sectionConverter.toDto(item.getSections()));
-            sectionConverter.setCours(true);
+            if (this.etatCours && item.getEtatCours() != null) {
+                dto.setEtatCours(etatCoursConverter.toDto(item.getEtatCours()));
+            }
+            if (this.parcours && item.getParcours() != null) {
+                parcoursConverter.setCourss(false);
+                dto.setParcours(parcoursConverter.toDto(item.getParcours()));
+            }
+            if (this.sections && ListUtil.isNotEmpty(item.getSections())) {
+                sectionConverter.init(true);
+                sectionConverter.setCours(false);
+                dto.setSections(sectionConverter.toDto(item.getSections()));
+                sectionConverter.setCours(true);
 
-        }
-        if(this.homeWorks && ListUtil.isNotEmpty(item.getHomeWorks())){
-            homeWorkConverter.init(true);
-            homeWorkConverter.setCours(false);
-            dto.setHomeWorks(homeWorkConverter.toDto(item.getHomeWorks()));
-            homeWorkConverter.setCours(true);
+            }
+            if (this.homeWorks && ListUtil.isNotEmpty(item.getHomeWorks())) {
+                homeWorkConverter.init(true);
+                homeWorkConverter.setCours(false);
+                dto.setHomeWorks(homeWorkConverter.toDto(item.getHomeWorks()));
+                homeWorkConverter.setCours(true);
 
-        }
+            }
 
 
-        return dto;
+            return dto;
         }
     }
 
@@ -153,88 +144,115 @@ public class CoursConverter extends AbstractConverter<Cours, CoursDto, CoursHist
     }
 
 
-    public HomeWorkQuestionConverter getHomeWorkQuestionConverter(){
+    public HomeWorkQuestionConverter getHomeWorkQuestionConverter() {
         return this.homeWorkQuestionConverter;
     }
-    public void setHomeWorkQuestionConverter(HomeWorkQuestionConverter homeWorkQuestionConverter ){
+
+    public void setHomeWorkQuestionConverter(HomeWorkQuestionConverter homeWorkQuestionConverter) {
         this.homeWorkQuestionConverter = homeWorkQuestionConverter;
     }
-    public SessionCoursConverter getSessionCoursConverter(){
+
+    public SessionCoursConverter getSessionCoursConverter() {
         return this.sessionCoursConverter;
     }
-    public void setSessionCoursConverter(SessionCoursConverter sessionCoursConverter ){
+
+    public void setSessionCoursConverter(SessionCoursConverter sessionCoursConverter) {
         this.sessionCoursConverter = sessionCoursConverter;
     }
-    public SectionConverter getSectionConverter(){
+
+    public SectionConverter getSectionConverter() {
         return this.sectionConverter;
     }
-    public void setSectionConverter(SectionConverter sectionConverter ){
+
+    public void setSectionConverter(SectionConverter sectionConverter) {
         this.sectionConverter = sectionConverter;
     }
-    public CategorieSectionConverter getCategorieSectionConverter(){
+
+    public CategorieSectionConverter getCategorieSectionConverter() {
         return this.categorieSectionConverter;
     }
-    public void setCategorieSectionConverter(CategorieSectionConverter categorieSectionConverter ){
+
+    public void setCategorieSectionConverter(CategorieSectionConverter categorieSectionConverter) {
         this.categorieSectionConverter = categorieSectionConverter;
     }
-    public ParcoursConverter getParcoursConverter(){
+
+    public ParcoursConverter getParcoursConverter() {
         return this.parcoursConverter;
     }
-    public void setParcoursConverter(ParcoursConverter parcoursConverter ){
+
+    public void setParcoursConverter(ParcoursConverter parcoursConverter) {
         this.parcoursConverter = parcoursConverter;
     }
-    public HomeWorkEtudiantConverter getHomeWorkEtudiantConverter(){
+
+    public HomeWorkEtudiantConverter getHomeWorkEtudiantConverter() {
         return this.homeWorkEtudiantConverter;
     }
-    public void setHomeWorkEtudiantConverter(HomeWorkEtudiantConverter homeWorkEtudiantConverter ){
+
+    public void setHomeWorkEtudiantConverter(HomeWorkEtudiantConverter homeWorkEtudiantConverter) {
         this.homeWorkEtudiantConverter = homeWorkEtudiantConverter;
     }
-    public HomeWorkConverter getHomeWorkConverter(){
+
+    public HomeWorkConverter getHomeWorkConverter() {
         return this.homeWorkConverter;
     }
-    public void setHomeWorkConverter(HomeWorkConverter homeWorkConverter ){
+
+    public void setHomeWorkConverter(HomeWorkConverter homeWorkConverter) {
         this.homeWorkConverter = homeWorkConverter;
     }
-    public EtatCoursConverter getEtatCoursConverter(){
+
+    public EtatCoursConverter getEtatCoursConverter() {
         return this.etatCoursConverter;
     }
-    public void setEtatCoursConverter(EtatCoursConverter etatCoursConverter ){
+
+    public void setEtatCoursConverter(EtatCoursConverter etatCoursConverter) {
         this.etatCoursConverter = etatCoursConverter;
     }
-    public SectionItemConverter getSectionItemConverter(){
+
+    public SectionItemConverter getSectionItemConverter() {
         return this.sectionItemConverter;
     }
-    public void setSectionItemConverter(SectionItemConverter sectionItemConverter ){
+
+    public void setSectionItemConverter(SectionItemConverter sectionItemConverter) {
         this.sectionItemConverter = sectionItemConverter;
     }
-    public TypeHomeWorkConverter getTypeHomeWorkConverter(){
+
+    public TypeHomeWorkConverter getTypeHomeWorkConverter() {
         return this.typeHomeWorkConverter;
     }
-    public void setTypeHomeWorkConverter(TypeHomeWorkConverter typeHomeWorkConverter ){
+
+    public void setTypeHomeWorkConverter(TypeHomeWorkConverter typeHomeWorkConverter) {
         this.typeHomeWorkConverter = typeHomeWorkConverter;
     }
-    public boolean  isEtatCours(){
+
+    public boolean isEtatCours() {
         return this.etatCours;
     }
-    public void  setEtatCours(boolean etatCours){
+
+    public void setEtatCours(boolean etatCours) {
         this.etatCours = etatCours;
     }
-    public boolean  isParcours(){
+
+    public boolean isParcours() {
         return this.parcours;
     }
-    public void  setParcours(boolean parcours){
+
+    public void setParcours(boolean parcours) {
         this.parcours = parcours;
     }
-    public boolean  isSections(){
-        return this.sections ;
+
+    public boolean isSections() {
+        return this.sections;
     }
-    public void  setSections(boolean sections ){
-        this.sections  = sections ;
+
+    public void setSections(boolean sections) {
+        this.sections = sections;
     }
-    public boolean  isHomeWorks(){
-        return this.homeWorks ;
+
+    public boolean isHomeWorks() {
+        return this.homeWorks;
     }
-    public void  setHomeWorks(boolean homeWorks ){
-        this.homeWorks  = homeWorks ;
+
+    public void setHomeWorks(boolean homeWorks) {
+        this.homeWorks = homeWorks;
     }
 }

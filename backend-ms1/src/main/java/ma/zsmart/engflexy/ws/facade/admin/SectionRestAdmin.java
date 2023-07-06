@@ -1,4 +1,4 @@
-package  ma.zsmart.engflexy.ws.facade.admin;
+package ma.zsmart.engflexy.ws.facade.admin;
 
 
 import io.swagger.annotations.Api;
@@ -12,30 +12,26 @@ import ma.zsmart.engflexy.ws.converter.SectionConverter;
 import ma.zsmart.engflexy.ws.dto.SectionDto;
 import ma.zsmart.engflexy.zynerator.controller.AbstractController;
 import ma.zsmart.engflexy.zynerator.dto.AuditEntityDto;
+import ma.zsmart.engflexy.zynerator.dto.FileTempDto;
 import ma.zsmart.engflexy.zynerator.util.PaginatedList;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import ma.zsmart.engflexy.zynerator.process.Result;
-
-
-import org.springframework.web.multipart.MultipartFile;
-import ma.zsmart.engflexy.zynerator.dto.FileTempDto;
 
 @Api("Manages section services")
 @RestController
 @RequestMapping("/api/admin/section/")
-public class SectionRestAdmin  extends AbstractController<Section, SectionDto, SectionHistory, SectionCriteria, SectionHistoryCriteria, SectionAdminService, SectionConverter> {
-
+public class SectionRestAdmin extends AbstractController<Section, SectionDto, SectionHistory, SectionCriteria, SectionHistoryCriteria, SectionAdminService, SectionConverter> {
 
     @ApiOperation("upload one section")
     @RequestMapping(value = "upload", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<FileTempDto> uploadFileAndGetChecksum(@RequestBody MultipartFile file) throws Exception {
         return super.uploadFileAndGetChecksum(file);
     }
+
     @ApiOperation("upload multiple sections")
     @RequestMapping(value = "upload-multiple", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<List<FileTempDto>> uploadMultipleFileAndGetChecksum(@RequestBody MultipartFile[] files) throws Exception {
@@ -59,6 +55,7 @@ public class SectionRestAdmin  extends AbstractController<Section, SectionDto, S
     public ResponseEntity<SectionDto> findById(@PathVariable Long id, String[] includes, String[] excludes) throws Exception {
         return super.findById(id, includes, excludes);
     }
+
     @ApiOperation("Saves the specified  section")
     @PostMapping("")
     public ResponseEntity<SectionDto> save(@RequestBody SectionDto dto) throws Exception {
@@ -76,10 +73,11 @@ public class SectionRestAdmin  extends AbstractController<Section, SectionDto, S
     public ResponseEntity<List<SectionDto>> delete(@RequestBody List<SectionDto> listToDelete) throws Exception {
         return super.delete(listToDelete);
     }
+
     @ApiOperation("Delete the specified section")
     @DeleteMapping("")
     public ResponseEntity<SectionDto> delete(@RequestBody SectionDto dto) throws Exception {
-            return super.delete(dto);
+        return super.delete(dto);
     }
 
     @ApiOperation("Delete the specified section")
@@ -87,43 +85,50 @@ public class SectionRestAdmin  extends AbstractController<Section, SectionDto, S
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         return super.deleteById(id);
     }
+
     @ApiOperation("Delete multiple sections by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
-            return super.deleteByIdIn(ids);
-     }
+        return super.deleteByIdIn(ids);
+    }
 
 
     @ApiOperation("find by categorieSection id")
     @GetMapping("categorieSection/id/{id}")
-    public List<Section> findByCategorieSectionId(@PathVariable Long id){
-        return service.findByCategorieSectionId(id);
+    public ResponseEntity<List<SectionDto>> findByCategorieSectionId(@PathVariable Long id) {
+        return super.findListByChildId(service::findByCategorieSectionId, id);
     }
+
     @ApiOperation("delete by categorieSection id")
     @DeleteMapping("categorieSection/id/{id}")
-    public int deleteByCategorieSectionId(@PathVariable Long id){
+    public int deleteByCategorieSectionId(@PathVariable Long id) {
         return service.deleteByCategorieSectionId(id);
     }
+
     @ApiOperation("find by cours id")
     @GetMapping("cours/id/{id}")
-    public List<Section> findByCoursId(@PathVariable Long id){
-        return service.findByCoursId(id);
+    public ResponseEntity<List<SectionDto>> findByCoursId(@PathVariable Long id) {
+        return super.findListByChildId(service::findByCoursId, id);
     }
+
     @ApiOperation("delete by cours id")
     @DeleteMapping("cours/id/{id}")
-    public int deleteByCoursId(@PathVariable Long id){
+    public int deleteByCoursId(@PathVariable Long id) {
         return service.deleteByCoursId(id);
     }
+
     @ApiOperation("find by sessionCours id")
     @GetMapping("sessionCours/id/{id}")
-    public List<Section> findBySessionCoursId(@PathVariable Long id){
-        return service.findBySessionCoursId(id);
+    public ResponseEntity<List<SectionDto>> findBySessionCoursId(@PathVariable Long id) {
+        return super.findListByChildId(service::findBySessionCoursId, id);
     }
+
     @ApiOperation("delete by sessionCours id")
     @DeleteMapping("sessionCours/id/{id}")
-    public int deleteBySessionCoursId(@PathVariable Long id){
+    public int deleteBySessionCoursId(@PathVariable Long id) {
         return service.deleteBySessionCoursId(id);
     }
+
     @ApiOperation("Finds a section and associated list by id")
     @GetMapping("detail/id/{id}")
     public ResponseEntity<SectionDto> findWithAssociatedLists(@PathVariable Long id) {
@@ -177,9 +182,8 @@ public class SectionRestAdmin  extends AbstractController<Section, SectionDto, S
     public ResponseEntity<Integer> getHistoryDataSize(@RequestBody SectionHistoryCriteria criteria) throws Exception {
         return super.getHistoryDataSize(criteria);
     }
-    public SectionRestAdmin (SectionAdminService service, SectionConverter converter) {
+
+    public SectionRestAdmin(SectionAdminService service, SectionConverter converter) {
         super(service, converter);
     }
-
-
 }

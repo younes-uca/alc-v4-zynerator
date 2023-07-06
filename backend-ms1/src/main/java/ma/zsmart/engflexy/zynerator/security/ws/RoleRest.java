@@ -1,4 +1,4 @@
-package  ma.zsmart.engflexy.security.ws;
+package ma.zsmart.engflexy.zynerator.security.ws;
 
 import java.util.List;
 

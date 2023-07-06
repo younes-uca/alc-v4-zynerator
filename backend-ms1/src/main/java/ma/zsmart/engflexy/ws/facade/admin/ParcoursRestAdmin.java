@@ -1,4 +1,4 @@
-package  ma.zsmart.engflexy.ws.facade.admin;
+package ma.zsmart.engflexy.ws.facade.admin;
 
 
 import io.swagger.annotations.Api;
@@ -18,9 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import ma.zsmart.engflexy.zynerator.process.Result;
-
 
 import org.springframework.web.multipart.MultipartFile;
 import ma.zsmart.engflexy.zynerator.dto.FileTempDto;
@@ -28,7 +25,7 @@ import ma.zsmart.engflexy.zynerator.dto.FileTempDto;
 @Api("Manages parcours services")
 @RestController
 @RequestMapping("/api/admin/parcours/")
-public class ParcoursRestAdmin  extends AbstractController<Parcours, ParcoursDto, ParcoursHistory, ParcoursCriteria, ParcoursHistoryCriteria, ParcoursAdminService, ParcoursConverter> {
+public class ParcoursRestAdmin extends AbstractController<Parcours, ParcoursDto, ParcoursHistory, ParcoursCriteria, ParcoursHistoryCriteria, ParcoursAdminService, ParcoursConverter> {
 
 
     @ApiOperation("upload one parcours")
@@ -36,6 +33,7 @@ public class ParcoursRestAdmin  extends AbstractController<Parcours, ParcoursDto
     public ResponseEntity<FileTempDto> uploadFileAndGetChecksum(@RequestBody MultipartFile file) throws Exception {
         return super.uploadFileAndGetChecksum(file);
     }
+
     @ApiOperation("upload multiple parcourss")
     @RequestMapping(value = "upload-multiple", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<List<FileTempDto>> uploadMultipleFileAndGetChecksum(@RequestBody MultipartFile[] files) throws Exception {
@@ -59,6 +57,7 @@ public class ParcoursRestAdmin  extends AbstractController<Parcours, ParcoursDto
     public ResponseEntity<ParcoursDto> findById(@PathVariable Long id, String[] includes, String[] excludes) throws Exception {
         return super.findById(id, includes, excludes);
     }
+
     @ApiOperation("Saves the specified  parcours")
     @PostMapping("")
     public ResponseEntity<ParcoursDto> save(@RequestBody ParcoursDto dto) throws Exception {
@@ -76,10 +75,11 @@ public class ParcoursRestAdmin  extends AbstractController<Parcours, ParcoursDto
     public ResponseEntity<List<ParcoursDto>> delete(@RequestBody List<ParcoursDto> listToDelete) throws Exception {
         return super.delete(listToDelete);
     }
+
     @ApiOperation("Delete the specified parcours")
     @DeleteMapping("")
     public ResponseEntity<ParcoursDto> delete(@RequestBody ParcoursDto dto) throws Exception {
-            return super.delete(dto);
+        return super.delete(dto);
     }
 
     @ApiOperation("Delete the specified parcours")
@@ -87,23 +87,26 @@ public class ParcoursRestAdmin  extends AbstractController<Parcours, ParcoursDto
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
         return super.deleteById(id);
     }
+
     @ApiOperation("Delete multiple parcourss by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
-            return super.deleteByIdIn(ids);
-     }
+        return super.deleteByIdIn(ids);
+    }
 
 
     @ApiOperation("find by centre id")
     @GetMapping("centre/id/{id}")
-    public List<Parcours> findByCentreId(@PathVariable Long id){
-        return service.findByCentreId(id);
+    public ResponseEntity<List<ParcoursDto>> findByCentreId(@PathVariable Long id) {
+        return super.findListByChildId(service::findByCentreId, id);
     }
+
     @ApiOperation("delete by centre id")
     @DeleteMapping("centre/id/{id}")
-    public int deleteByCentreId(@PathVariable Long id){
+    public int deleteByCentreId(@PathVariable Long id) {
         return service.deleteByCentreId(id);
     }
+
     @ApiOperation("Finds a parcours and associated list by id")
     @GetMapping("detail/id/{id}")
     public ResponseEntity<ParcoursDto> findWithAssociatedLists(@PathVariable Long id) {
@@ -157,9 +160,8 @@ public class ParcoursRestAdmin  extends AbstractController<Parcours, ParcoursDto
     public ResponseEntity<Integer> getHistoryDataSize(@RequestBody ParcoursHistoryCriteria criteria) throws Exception {
         return super.getHistoryDataSize(criteria);
     }
-    public ParcoursRestAdmin (ParcoursAdminService service, ParcoursConverter converter) {
+
+    public ParcoursRestAdmin(ParcoursAdminService service, ParcoursConverter converter) {
         super(service, converter);
     }
-
-
 }

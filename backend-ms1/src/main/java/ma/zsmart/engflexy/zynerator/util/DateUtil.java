@@ -10,13 +10,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 public class DateUtil {
 
     public static final String DEFAULT_DATE_FORMAT = "dd/MM/yyyy";
     public static final String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm:ss";
-    // public static final String DATE_FORMAT_WITH_HOUR = "MM/dd/yyyy HH:mm";
     public static final String DATE_FORMAT_WITH_HOUR = "MM/dd/yyyy HH:mm";
+    public static final String DATE_FORMAT_WITH_HOUR_PATTERN = "[0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{2}:[0-9]{2}";
     public static final String DATE_FORMAT_NAME = "ddMMyyyyHHmmss";
     public final static String DATE_FORMAT_FILE = "yyMMddHHmmss";
     public static final String HOUR_FORMAT = "HH:mm:ss";
@@ -35,8 +36,7 @@ public class DateUtil {
     }
 
     public static LocalDateTime addDaysToDate(LocalDateTime date, long days) {
-        if (date != null)
-            return date.plusDays(days);
+        if (date != null) return date.plusDays(days);
         return null;
     }
 
@@ -45,9 +45,13 @@ public class DateUtil {
     }
 
     public static LocalDateTime stringEnToDate(final String strDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_ENG, Locale.ENGLISH);
+        DateTimeFormatter formatter;
+        if (Pattern.matches(DATE_FORMAT_WITH_HOUR_PATTERN, strDate)) {
+            formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR, Locale.ENGLISH);
+        } else {
+            formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_ENG, Locale.ENGLISH);
+        }
         return LocalDateTime.parse(strDate, formatter);
-
     }
 
     public static String getCurrentDate() {
@@ -97,8 +101,7 @@ public class DateUtil {
     public static Timestamp stringToTimestamp(final String strDate) {
         if (StringUtils.hasLength(strDate)) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
-            return new Timestamp(
-                    LocalDateTime.parse(strDate, formatter).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+            return new Timestamp(LocalDateTime.parse(strDate, formatter).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
         }
         return null;
     }
@@ -132,32 +135,33 @@ public class DateUtil {
         return "";
     }
 
-/*
+    /*
+        public static String dateTimeToString(final LocalDateTime date) {
+            try {
+                if (date != null) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR);
+                    return date.format(formatter);
+                }
+            } catch (Exception e) {
+                return null;
+            }
+            return null;
+        }
+    */
     public static String dateTimeToString(final LocalDateTime date) {
         try {
             if (date != null) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR);
-                return date.format(formatter);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR, Locale.ENGLISH);
+                OffsetDateTime off = OffsetDateTime.of(date, ZoneOffset.UTC);
+                ZonedDateTime zoned = off.atZoneSameInstant(ZoneId.of("UTC+1"));
+                return zoned.toLocalDateTime().format(formatter);
             }
         } catch (Exception e) {
             return null;
         }
         return null;
     }
-*/
-    public static String dateTimeToString(final LocalDateTime date) {
-        try {
-            if (date != null) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR,Locale.ENGLISH);
-                OffsetDateTime off = OffsetDateTime.of(date, ZoneOffset.UTC);
-                ZonedDateTime zoned = off.atZoneSameInstant(ZoneId.of("UTC+1"));
-                return zoned.toLocalDateTime().format(formatter);
-            }
-        } catch (Exception e) {
-        return null;
-        }
-    return null;
-    }
+
     public static String dateTimeToString(final LocalDate date) {
         try {
             if (date != null) {
@@ -226,8 +230,7 @@ public class DateUtil {
     public static Timestamp StringToTimesTimpWithHour(final String date) {
         if (date != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
-            return new Timestamp(
-                    LocalDateTime.parse(date, formatter).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+            return new Timestamp(LocalDateTime.parse(date, formatter).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
 
         }
         return null;

@@ -1,0 +1,7 @@
+/*
+export enum SectionStatus {
+    VALIDATE = "VALIDATE",
+    CONTENU_MESSING = "CONTENU_MESSING",
+    MEDIA_MESSING = "MEDIA_MESSING",
+    PENDING = "PENDING"
+}*/
