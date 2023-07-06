@@ -1,22 +1,22 @@
-import { Injectable } from '@angular/core';
-import { FuseNavigationItem } from '@fuse/components/navigation';
-import { FuseMockApiService } from '@fuse/lib/mock-api';
-import { compactNavigation, defaultNavigation, futuristicNavigation, horizontalNavigation } from 'app/mock-api/common/navigation/data';
-import { cloneDeep } from 'lodash-es';
+import {Injectable} from '@angular/core';
+import {FuseNavigationItem} from '@fuse/components/navigation';
+import {FuseMockApiService} from '@fuse/lib/mock-api';
+import {defaultNavigation, studentNavigation, teacherNavigation} from 'app/mock-api/common/navigation/data';
+import {cloneDeep} from 'lodash-es';
+import {AuthService} from "../../../core/auth/auth.service";
 
 @Injectable({providedIn: 'root'})
-export class NavigationMockApi
-{
-    private readonly _compactNavigation: FuseNavigationItem[] = compactNavigation;
+export class NavigationMockApi {
     private readonly _defaultNavigation: FuseNavigationItem[] = defaultNavigation;
-    private readonly _futuristicNavigation: FuseNavigationItem[] = futuristicNavigation;
-    private readonly _horizontalNavigation: FuseNavigationItem[] = horizontalNavigation;
+    private readonly _studentNavigation: FuseNavigationItem[] = studentNavigation;
+    private readonly _teacherNavigation: FuseNavigationItem[] = teacherNavigation;
 
     /**
      * Constructor
      */
-    constructor(private _fuseMockApiService: FuseMockApiService)
-    {
+    constructor(private _fuseMockApiService: FuseMockApiService,
+                private authService: AuthService
+    ) {
         // Register Mock API handlers
         this.registerHandlers();
     }
@@ -28,59 +28,33 @@ export class NavigationMockApi
     /**
      * Register Mock API handlers
      */
-    registerHandlers(): void
-    {
+    registerHandlers(): void {
         // -----------------------------------------------------------------------------------------------------
         // @ Navigation - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
             .onGet('api/common/navigation')
-            .reply(() =>
-            {
-                // Fill compact navigation children using the default navigation
-                this._compactNavigation.forEach((compactNavItem) =>
-                {
-                    this._defaultNavigation.forEach((defaultNavItem) =>
-                    {
-                        if ( defaultNavItem.id === compactNavItem.id )
-                        {
-                            compactNavItem.children = cloneDeep(defaultNavItem.children);
-                        }
-                    });
-                });
+            .reply(() => {
+                // Fill default navigation using student navigation
+                let userRole = this.authService._user?.role;
 
-                // Fill futuristic navigation children using the default navigation
-                this._futuristicNavigation.forEach((futuristicNavItem) =>
-                {
-                    this._defaultNavigation.forEach((defaultNavItem) =>
-                    {
-                        if ( defaultNavItem.id === futuristicNavItem.id )
-                        {
-                            futuristicNavItem.children = cloneDeep(defaultNavItem.children);
-                        }
-                    });
-                });
+                // Set the navigation based on the user role
+                let navigationItems: FuseNavigationItem[] = [];
 
-                // Fill horizontal navigation children using the default navigation
-                this._horizontalNavigation.forEach((horizontalNavItem) =>
-                {
-                    this._defaultNavigation.forEach((defaultNavItem) =>
-                    {
-                        if ( defaultNavItem.id === horizontalNavItem.id )
-                        {
-                            horizontalNavItem.children = cloneDeep(defaultNavItem.children);
-                        }
-                    });
-                });
+                if (userRole === 'STUDENT') {
+                    navigationItems = cloneDeep(this._studentNavigation);
+                } else if (userRole === 'TEACHER') {
+                    navigationItems = cloneDeep(this._teacherNavigation);
+                } else {
+                    // If the user role is not STUDENT or TEACHER, use the default navigation
+                    navigationItems = cloneDeep(this._defaultNavigation);
+                }
 
                 // Return the response
                 return [
                     200,
                     {
-                        compact   : cloneDeep(this._compactNavigation),
-                        default   : cloneDeep(this._defaultNavigation),
-                        futuristic: cloneDeep(this._futuristicNavigation),
-                        horizontal: cloneDeep(this._horizontalNavigation),
+                        default: navigationItems
                     },
                 ];
             });

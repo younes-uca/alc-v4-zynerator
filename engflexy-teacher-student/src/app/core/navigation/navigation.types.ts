@@ -1,9 +1,5 @@
-import { FuseNavigationItem } from '@fuse/components/navigation';
+import {FuseNavigationItem} from '@fuse/components/navigation';
 
-export interface Navigation
-{
-    compact: FuseNavigationItem[];
+export interface Navigation {
     default: FuseNavigationItem[];
-    futuristic: FuseNavigationItem[];
-    horizontal: FuseNavigationItem[];
 }

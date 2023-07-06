@@ -1,8 +1,8 @@
 import {Route} from '@angular/router';
 import {initialDataResolver} from 'app/app.resolvers';
-import {AuthGuard} from 'app/core/auth/guards/auth.guard';
 import {NoAuthGuard} from 'app/core/auth/guards/noAuth.guard';
 import {LayoutComponent} from 'app/layout/layout.component';
+import {AuthGuard} from "./core/auth/guards/auth.guard";
 
 export const appRoutes: Route[] = [
 
@@ -83,7 +83,14 @@ export const appRoutes: Route[] = [
             initialData: initialDataResolver
         },
         children: [
-            {path: 'student', loadChildren: () => import('app/modules/admin/student/student.routes')},
+            {
+                path: 'student',
+                loadChildren: () => import('app/modules/admin/student/student.routes')
+            },
+            {
+                path: 'teacher',
+                loadChildren: () => import('app/modules/admin/teacher/teacher.routes')
+            },
         ]
     }
 ];

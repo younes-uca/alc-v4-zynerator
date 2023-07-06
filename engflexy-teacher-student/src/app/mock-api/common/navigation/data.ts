@@ -7,28 +7,16 @@ export const defaultNavigation: FuseNavigationItem[] = [
         title: 'Dashboard',
         type: 'basic',
         icon: 'heroicons_outline:chart-pie',
-        link: '/dashboard'
-    }
-];
-export const compactNavigation: FuseNavigationItem[] = [
-    {
-        id: 'dashboard',
-        title: 'Dashboard',
+        link: 'student/dashboard'
+    }, {
+        id: 'my classes',
+        title: 'My Classes',
         type: 'basic',
-        icon: 'heroicons_outline:chart-pie',
-        link: '/dashboard'
+        icon: 'heroicons_outline:briefcase',
+        link: 'student/classes'
     }
 ];
-export const futuristicNavigation: FuseNavigationItem[] = [
-    {
-        id: 'dashboard',
-        title: 'Dashboard',
-        type: 'basic',
-        icon: 'heroicons_outline:chart-pie',
-        link: '/dashboard'
-    }
-];
-export const horizontalNavigation: FuseNavigationItem[] = [
+export const studentNavigation: FuseNavigationItem[] = [
     {
         id: 'dashboard',
         title: 'Dashboard',
@@ -41,5 +29,15 @@ export const horizontalNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:briefcase',
         link: 'student/classes'
+    }
+];
+
+export const teacherNavigation: FuseNavigationItem[] = [
+    {
+        id: 'dashboard',
+        title: 'Dashboard',
+        type: 'basic',
+        icon: 'heroicons_outline:chart-pie',
+        link: 'teacher/dashboard'
     }
 ];
