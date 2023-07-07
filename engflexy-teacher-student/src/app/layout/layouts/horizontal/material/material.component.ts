@@ -16,13 +16,14 @@ import { SearchComponent } from 'app/layout/common/search/search.component';
 import { ShortcutsComponent } from 'app/layout/common/shortcuts/shortcuts.component';
 import { UserComponent } from 'app/layout/common/user/user.component';
 import { Subject, takeUntil } from 'rxjs';
+import {QuickChatComponent} from "../../../common/quick-chat/quick-chat.component";
 
 @Component({
     selector     : 'material-layout',
     templateUrl  : './material.component.html',
     encapsulation: ViewEncapsulation.None,
     standalone   : true,
-    imports: [FuseLoadingBarComponent, NgIf, FuseVerticalNavigationComponent, MatButtonModule, MatIconModule, LanguagesComponent, FuseFullscreenComponent, SearchComponent, ShortcutsComponent, MessagesComponent, NotificationsComponent, UserComponent, FuseHorizontalNavigationComponent, RouterOutlet, NgOptimizedImage],
+    imports: [FuseLoadingBarComponent, NgIf, FuseVerticalNavigationComponent, MatButtonModule, MatIconModule, LanguagesComponent, FuseFullscreenComponent, SearchComponent, ShortcutsComponent, MessagesComponent, NotificationsComponent, UserComponent, FuseHorizontalNavigationComponent, RouterOutlet, NgOptimizedImage, QuickChatComponent],
 })
 export class MaterialLayoutComponent implements OnInit, OnDestroy
 {
