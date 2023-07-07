@@ -1,0 +1,155 @@
+<main>
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900">My Words</h1>
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
+            <article class="flex items-center bg-white gap-4 rounded-lg border border-gray-100 p-6">
+                    <span class="rounded-full bg-gray-100 p-3 ">
+                        <img class="h-8 w-8" ngSrc="/assets/icons/partying-face.png" height="48" width="48" alt="">
+                    </span>
+
+                <div>
+                    <p class="text-2xl font-medium text-gray-900">242</p>
+
+                    <p class="text-sm text-gray-500">learned words</p>
+                </div>
+            </article>
+
+            <article class="flex items-center bg-white gap-4 rounded-lg border border-gray-100 p-6">
+                    <span class="rounded-full bg-gray-100 p-3 ">
+                        <img class="h-8 w-8" ngSrc="/assets/icons/fire.png" height="48" width="48" alt="">
+                    </span>
+
+                <div>
+                    <p class="text-2xl font-medium text-gray-900">2</p>
+
+                    <p class="text-sm text-gray-500">To learn</p>
+                </div>
+            </article>
+
+            <article class="flex items-center bg-white gap-4 rounded-lg border border-gray-100 p-6">
+                    <span class="rounded-full bg-gray-100 p-3 ">
+                        <img class="h-8 w-8" ngSrc="/assets/icons/man-running.png" height="48" width="48" alt="">
+                    </span>
+
+                <div>
+                    <p class="text-2xl font-medium text-gray-900">24</p>
+
+                    <p class="text-sm text-gray-500">Average pace per day</p>
+                </div>
+            </article>
+
+            <article class="flex items-center bg-white gap-4 rounded-lg border border-gray-100 p-6">
+                    <span class="rounded-full bg-gray-100 p-3 ">
+                        <img class="h-8 w-8" ngSrc="/assets/icons/trophy.png" height="48" width="48" alt="">
+                    </span>
+
+                <div>
+                    <p class="text-2xl font-medium text-gray-900">240</p>
+
+                    <p class="text-sm text-gray-500">Total words</p>
+                </div>
+            </article>
+
+        </div>
+
+        <mat-tab-group>
+            <mat-tab label=" To learn">
+                <div class="flex">
+                    <h3 class="text-lg font-bold mr-2 tracking-tight text-gray-700">All words to learn</h3>
+                    <div class="flex-auto border-b-2 border-dotted border-gray-300">
+                    </div>
+                </div>
+
+                <div class="flex mt-10 p-2 flex-wrap">
+
+                    <div class="flex pt-3	 flex-row">
+
+                        <mat-form-field class="fuse-mat-bold fuse-mat-dense fuse-mat-rounded flex-auto mr-2 gt-xs:pr-3">
+                            <mat-select [placeholder]="'Language'">
+                                <mat-option value="en">En</mat-option>
+                                <mat-option value="fr">Fr</mat-option>
+                                <mat-option value="ar">Ar</mat-option>
+                            </mat-select>
+                            <mat-icon
+                                class="icon-size-5"
+                                matPrefix
+                                [svgIcon]="'heroicons_solid:language'"></mat-icon>
+                        </mat-form-field>
+
+                        <mat-icon class="icon-size-7 mt-2.5 mr-2"
+                                  svgIcon="heroicons_outline:arrows-right-left"></mat-icon>
+
+                        <mat-form-field class="fuse-mat-bold fuse-mat-dense fuse-mat-rounded flex-auto gt-xs:pl-3">
+                            <mat-select [placeholder]="'Language'">
+                                <mat-option value="eng">Eng</mat-option>
+                                <mat-option value="fr">Fr</mat-option>
+                                <mat-option value="ar">Ar</mat-option>
+                            </mat-select>
+                            <mat-icon
+                                class="icon-size-5"
+                                matPrefix
+                                [svgIcon]="'heroicons_solid:language'"></mat-icon>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="grow h-14 border-l-2 pl-2.5 border-solid border-gray-300 m-2">
+                        <mat-form-field class="fuse-mat-bold w-full ">
+                            <input
+                                matInput
+                                [placeholder]="'Add new word..'">
+                        </mat-form-field>
+                    </div>
+                    <div class=" w-14 pt-3.5 h-14">
+                        <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                            <mat-icon>arrow_right_alt</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="mt-12 shadow-sm border rounded-lg overflow-x-auto">
+                    <table class="w-full table-auto text-sm text-left">
+                        <thead class="text-gray-600 font-medium border-b">
+                        <tr>
+                            <th class="py-3 px-6 flex items-center gap-x-4">
+                                <div>
+                                    <mat-checkbox
+                                        class="relative flex w-5 h-5  peer-checked:bg-indigo-600 rounded-md  ring-offset-2 ring-indigo-600 duration-150 peer-active:ring cursor-pointer"></mat-checkbox>
+                                </div>
+                                word
+                            </th>
+                            <th class="py-3 px-6">translation</th>
+                            <th class="py-3 px-6"></th>
+
+                        </tr>
+                        </thead>
+                        <tbody class="text-gray-600 divide-y">
+                        <tr class="odd:bg-gray-50 even:bg-white">
+                            <td class="px-6 py-4 whitespace-nowrap flex items-center gap-x-4">
+                                <div>
+                                    <mat-checkbox
+                                        class="relative flex w-5 h-5  peer-checked:bg-indigo-600 rounded-md  ring-offset-2 ring-indigo-600 duration-150 peer-active:ring cursor-pointer"></mat-checkbox>
+                                </div>
+                                Hello
+                            </td>
+
+                            <td class="px-6 py-4 whitespace-nowrap">مرحبا</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <button matTooltip="Mark as learned" mat-mini-fab class="mr-2" color="primary">
+                                    <mat-icon>check</mat-icon>
+                                </button>
+
+                                <button matTooltip="delete" mat-mini-fab color="warn">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                        </tbody>
+                    </table>
+                </div>
+
+            </mat-tab>
+            <mat-tab label="Learned"> Learned</mat-tab>
+        </mat-tab-group>
+    </div>
+</main>

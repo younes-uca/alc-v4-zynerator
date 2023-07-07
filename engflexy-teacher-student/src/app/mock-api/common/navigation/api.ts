@@ -41,6 +41,7 @@ export class NavigationMockApi {
                 // Set the navigation based on the user role
                 let navigationItems: FuseNavigationItem[] = [];
 
+
                 if (userRole === 'STUDENT') {
                     navigationItems = cloneDeep(this._studentNavigation);
                 } else if (userRole === 'TEACHER') {
