@@ -1,8 +1,10 @@
 package  ma.zsmart.engflexy.dao.specification.core;
 
+import ma.zsmart.engflexy.zynerator.enumeration.SectionStatus;
 import ma.zsmart.engflexy.zynerator.specification.AbstractSpecification;
 import ma.zsmart.engflexy.dao.criteria.core.SectionCriteria;
 import ma.zsmart.engflexy.bean.core.Section;
+import ma.zsmart.engflexy.zynerator.util.StringUtil;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -12,6 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SectionSpecification extends  AbstractSpecification<SectionCriteria, Section>  {
+
+    public void addPredicateStatus() {
+        if (criteria.getStatus() != null) {
+            predicates.add(builder.equal(builder.lower(root.get("status")), criteria.getStatus()));
+        }
+    }
 
     @Override
     public void constructPredicates() {
@@ -37,6 +45,7 @@ public class SectionSpecification extends  AbstractSpecification<SectionCriteria
         addPredicateFk("sessionCours","id", criteria.getSessionCours()==null?null:criteria.getSessionCours().getId());
         addPredicateFk("sessionCours","id", criteria.getSessionCourss());
         addPredicateFk("sessionCours","reference", criteria.getSessionCours()==null?null:criteria.getSessionCours().getReference());
+        addPredicateStatus();
     }
 
     public SectionSpecification(SectionCriteria criteria) {
@@ -46,5 +55,4 @@ public class SectionSpecification extends  AbstractSpecification<SectionCriteria
     public SectionSpecification(SectionCriteria criteria, boolean distinct) {
         super(criteria, distinct);
     }
-
 }

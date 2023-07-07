@@ -12,6 +12,7 @@ import {SessionCoursService} from 'src/app/controller/service/SessionCours.servi
 import {SessionCoursDto} from 'src/app/controller/model/SessionCours.model';
 import {CategorieSectionDto} from 'src/app/controller/model/CategorieSection.model';
 import {CoursDto} from 'src/app/controller/model/Cours.model';
+import {SECTION_STATUS_LIST} from "../../../../../../controller/utils/enums";
 
 
 @Component({
@@ -24,6 +25,7 @@ export class SectionListAdminComponent extends AbstractListController<SectionDto
     categorieSections: Array<CategorieSectionDto>;
     courss: Array<CoursDto>;
     sessionCourss: Array<SessionCoursDto>;
+    sectionStatuses = SECTION_STATUS_LIST
 
     constructor(
         sectionService: SectionService,

@@ -1,7 +1,13 @@
-/*
 export enum SectionStatus {
-    VALIDATE = "VALIDATE",
-    CONTENU_MESSING = "CONTENU_MESSING",
-    MEDIA_MESSING = "MEDIA_MESSING",
-    PENDING = "PENDING"
-}*/
+    VALIDATE = "Validate",
+    CONTENU_MESSING = "Contenu Messing",
+    MEDIA_MESSING = "Media Messing",
+    PENDING = "Pending"
+}
+
+export const SECTION_STATUS_LIST = [
+    SectionStatus.VALIDATE,
+    SectionStatus.PENDING,
+    SectionStatus.MEDIA_MESSING,
+    SectionStatus.CONTENU_MESSING,
+]

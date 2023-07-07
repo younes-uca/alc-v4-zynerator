@@ -23,95 +23,103 @@
             <p-toolbar *ngIf="findByCriteriaShow">
 
                 <div class="align-form-search">
-                        <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <input class="mr-2" pInputText id="1" type="text" [(ngModel)]="criteria.codeLike">
-                            <label for="1">{{'Code' | translate}}</label>
-                        </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <input class="mr-2" pInputText id="2" type="text" [(ngModel)]="criteria.libelleLike">
-                            <label for="2">{{'Libelle' | translate}}</label>
-                        </span>
+                        <input class="mr-2" pInputText id="1" type="text" [(ngModel)]="criteria.codeLike">
+                        <label for="1">{{'Code' | translate}}</label>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <input class="mr-2" pInputText id="3" type="text" [(ngModel)]="criteria.urlImageLike">
-                            <label for="3">{{'Url image' | translate}}</label>
-                        </span>
+                        <input class="mr-2" pInputText id="2" type="text" [(ngModel)]="criteria.libelleLike">
+                        <label for="2">{{'Libelle' | translate}}</label>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <input class="mr-2" pInputText id="4" type="text" [(ngModel)]="criteria.urlImage2Like">
-                            <label for="4">{{'Url image2' | translate}}</label>
-                        </span>
+                        <input class="mr-2" pInputText id="3" type="text" [(ngModel)]="criteria.urlImageLike">
+                        <label for="3">{{'Url image' | translate}}</label>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <input class="mr-2" pInputText id="5" type="text" [(ngModel)]="criteria.urlImage3Like">
-                            <label for="5">{{'Url image3' | translate}}</label>
-                        </span>
+                        <input class="mr-2" pInputText id="4" type="text" [(ngModel)]="criteria.urlImage2Like">
+                        <label for="4">{{'Url image2' | translate}}</label>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <input class="mr-2" pInputText id="6" type="text" [(ngModel)]="criteria.urlVideoLike">
-                            <label for="6">{{'Url video' | translate}}</label>
-                        </span>
+                        <input class="mr-2" pInputText id="5" type="text" [(ngModel)]="criteria.urlImage3Like">
+                        <label for="5">{{'Url image3' | translate}}</label>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <input class="mr-2" pInputText id="7" type="text" [(ngModel)]="criteria.contenuLike">
-                            <label for="7">{{'Contenu' | translate}}</label>
-                        </span>
+                        <input class="mr-2" pInputText id="6" type="text" [(ngModel)]="criteria.urlVideoLike">
+                        <label for="6">{{'Url video' | translate}}</label>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <input class="mr-2" pInputText id="8" type="text" [(ngModel)]="criteria.questionsLike">
-                            <label for="8">{{'Questions' | translate}}</label>
-                        </span>
+                        <input class="mr-2" pInputText id="7" type="text" [(ngModel)]="criteria.contenuLike">
+                        <label for="7">{{'Contenu' | translate}}</label>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <input class="mr-2" pInputText id="9" type="text" [(ngModel)]="criteria.indicationProfLike">
-                            <label for="9">{{'Indication prof' | translate}}</label>
-                        </span>
+                        <input class="mr-2" pInputText id="8" type="text" [(ngModel)]="criteria.questionsLike">
+                        <label for="8">{{'Questions' | translate}}</label>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.numeroOrderMin"
-                                           id="10-1"></p-inputNumber>
-                            <label for="10-1">{{'Numero order' | translate}} Min</label>
-                        </span>
+                        <input class="mr-2" pInputText id="9" type="text" [(ngModel)]="criteria.indicationProfLike">
+                        <label for="9">{{'Indication prof' | translate}}</label>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.numeroOrderMax"
-                                           id="10-2"></p-inputNumber>
-                            <label for="10-2">{{'Numero order' | translate}} Max</label>
-                       </span>
+                        <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.numeroOrderMin"
+                                       id="10-1"></p-inputNumber>
+                        <label for="10-1">{{'Numero order' | translate}} Min</label>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <p-dropdown [options]="categorieSections" [(ngModel)]="criteria.categorieSection" id="11"
-                                        [filter]="true"
-                                        [showClear]="true" placeholder="{{'Categorie section' | translate}}"
-                                        optionLabel="code">
-                            </p-dropdown>
-                        </span>
+                        <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.numeroOrderMax"
+                                       id="10-2"></p-inputNumber>
+                        <label for="10-2">{{'Numero order' | translate}} Max</label>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <p-dropdown [options]="courss" [(ngModel)]="criteria.cours" id="12" [filter]="true"
-                                        [showClear]="true" placeholder="{{'Cours' | translate}}" optionLabel="libelle">
-                            </p-dropdown>
-                        </span>
+                        <p-dropdown [options]="categorieSections" [(ngModel)]="criteria.categorieSection" id="11"
+                                    [filter]="true"
+                                    [showClear]="true" placeholder="{{'Categorie section' | translate}}"
+                                    optionLabel="code">
+                        </p-dropdown>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.urlMin"
-                                           id="13-1"></p-inputNumber>
-                            <label for="13-1">{{'Url' | translate}} Min</label>
-                        </span>
+                        <p-dropdown [options]="courss" [(ngModel)]="criteria.cours" id="12" [filter]="true"
+                                    [showClear]="true" placeholder="{{'Cours' | translate}}" optionLabel="libelle">
+                        </p-dropdown>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.urlMax"
-                                           id="13-2"></p-inputNumber>
-                            <label for="13-2">{{'Url' | translate}} Max</label>
-                       </span>
+                        <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.urlMin"
+                                       id="13-1"></p-inputNumber>
+                        <label for="13-1">{{'Url' | translate}} Min</label>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.contentMin"
-                                           id="14-1"></p-inputNumber>
-                            <label for="14-1">{{'Content' | translate}} Min</label>
-                        </span>
+                        <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.urlMax"
+                                       id="13-2"></p-inputNumber>
+                        <label for="13-2">{{'Url' | translate}} Max</label>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.contentMax"
-                                           id="14-2"></p-inputNumber>
-                            <label for="14-2">{{'Content' | translate}} Max</label>
-                       </span>
+                        <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.contentMin"
+                                       id="14-1"></p-inputNumber>
+                        <label for="14-1">{{'Content' | translate}} Min</label>
+                    </span>
                     <span class=" p-float-label mr-3 align-search-items mt-4">
-                            <p-dropdown [options]="sessionCourss" [(ngModel)]="criteria.sessionCours" id="16"
-                                        [filter]="true"
-                                        [showClear]="true" placeholder="{{'Session cours' | translate}}"
-                                        optionLabel="reference">
-                            </p-dropdown>
-                        </span>
+                        <p-inputNumber class="mr-2" mode="decimal"
+                                       [(ngModel)]="criteria.contentMax"
+                                       id="14-2"></p-inputNumber>
+                        <label for="14-2">{{'Content' | translate}} Max</label>
+                    </span>
+                    <span class=" p-float-label mr-3 align-search-items mt-4">
+                        <p-dropdown [options]="sessionCourss" [(ngModel)]="criteria.sessionCours" id="16"
+                                    [filter]="true"
+                                    [showClear]="true" placeholder="{{'Session cours' | translate}}"
+                                    optionLabel="reference">
+                        </p-dropdown>
+                    </span>
+                    <span class=" p-float-label mr-3 align-search-items mt-4">
+                        <p-dropdown [options]="sectionStatuses" [(ngModel)]="criteria.status" id="17"
+                                    [filter]="true"
+                                    [showClear]="true" placeholder="{{'Status' | translate}}">
+                        </p-dropdown>
+                    </span>
                 </div>
 
                 <div class="align-search-button">
-                    <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down"
+                    <button type="submit" pButton pRipple label="{{'validate' | translate}}"
+                            icon="pi pi-sort-amount-down"
                             class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
                 </div>
             </p-toolbar>

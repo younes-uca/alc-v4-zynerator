@@ -2,6 +2,8 @@ package  ma.zsmart.engflexy.dao.criteria.core;
 
 
 import ma.zsmart.engflexy.zynerator.criteria.BaseCriteria;
+import ma.zsmart.engflexy.zynerator.enumeration.SectionStatus;
+
 import java.util.List;
 
 public class SectionCriteria extends  BaseCriteria  {
@@ -33,6 +35,7 @@ public class SectionCriteria extends  BaseCriteria  {
     private String content;
     private String contentMin;
     private String contentMax;
+    private String status;
 
     private CategorieSectionCriteria categorieSection ;
     private List<CategorieSectionCriteria> categorieSections ;
@@ -260,5 +263,13 @@ public class SectionCriteria extends  BaseCriteria  {
 
     public void setSessionCourss(List<SessionCoursCriteria> sessionCourss){
         this.sessionCourss = sessionCourss;
+    }
+
+    public SectionStatus getStatus() {
+        return SectionStatus.toEnum(status);
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

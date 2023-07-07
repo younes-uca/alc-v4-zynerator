@@ -5,7 +5,7 @@ import {SectionItemCriteria} from './SectionItemCriteria.model';
 import {BaseCriteria} from 'src/app/zynerator/criteria/BaseCriteria.model';
 
 
-export class SectionCriteria  extends   BaseCriteria  {
+export class SectionCriteria extends BaseCriteria {
 
     public id: number;
     public code: string;
@@ -26,21 +26,21 @@ export class SectionCriteria  extends   BaseCriteria  {
     public questionsLike: string;
     public indicationProf: string;
     public indicationProfLike: string;
-     public numeroOrder: number;
-     public numeroOrderMin: number;
-     public numeroOrderMax: number;
-     public url: number;
-     public urlMin: number;
-     public urlMax: number;
-     public content: number;
-     public contentMin: number;
-     public contentMax: number;
-  public categorieSection: CategorieSectionCriteria ;
-  public categorieSections: Array<CategorieSectionCriteria> ;
-  public cours: CoursCriteria ;
-  public courss: Array<CoursCriteria> ;
-  public sessionCours: SessionCoursCriteria ;
-  public sessionCourss: Array<SessionCoursCriteria> ;
-      public sectionItems: Array<SectionItemCriteria>;
-
+    public numeroOrder: number;
+    public numeroOrderMin: number;
+    public numeroOrderMax: number;
+    public url: number;
+    public urlMin: number;
+    public urlMax: number;
+    public content: number;
+    public contentMin: number;
+    public contentMax: number;
+    public categorieSection: CategorieSectionCriteria;
+    public categorieSections: Array<CategorieSectionCriteria>;
+    public cours: CoursCriteria;
+    public courss: Array<CoursCriteria>;
+    public sessionCours: SessionCoursCriteria;
+    public sessionCourss: Array<SessionCoursCriteria>;
+    public sectionItems: Array<SectionItemCriteria>;
+    public status: string;
 }
