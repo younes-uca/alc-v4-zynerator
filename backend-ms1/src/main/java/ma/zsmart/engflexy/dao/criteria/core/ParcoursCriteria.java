@@ -1,19 +1,20 @@
-package  ma.zsmart.engflexy.dao.criteria.core;
+package ma.zsmart.engflexy.dao.criteria.core;
 
 
 import ma.zsmart.engflexy.zynerator.criteria.BaseCriteria;
+import ma.zsmart.engflexy.zynerator.util.DateUtil;
+
 import java.util.List;
-import java.time.LocalDateTime;
 import java.time.LocalDate;
 
-public class ParcoursCriteria extends  BaseCriteria  {
+public class ParcoursCriteria extends BaseCriteria {
 
-    private LocalDateTime datePublication;
-    private LocalDateTime datePublicationFrom;
-    private LocalDateTime datePublicationTo;
-    private LocalDateTime dateCreation;
-    private LocalDateTime dateCreationFrom;
-    private LocalDateTime dateCreationTo;
+    private String datePublication;
+    private String datePublicationFrom;
+    private String datePublicationTo;
+    private String dateCreation;
+    private String dateCreationFrom;
+    private String dateCreationTo;
     private String description;
     private String descriptionLike;
     private String code;
@@ -27,138 +28,171 @@ public class ParcoursCriteria extends  BaseCriteria  {
     private String nombreCoursMin;
     private String nombreCoursMax;
 
-    private CentreCriteria centre ;
-    private List<CentreCriteria> centres ;
+    private CentreCriteria centre;
+    private List<CentreCriteria> centres;
 
 
-    public ParcoursCriteria(){}
+    public ParcoursCriteria() {
+    }
 
-    public LocalDateTime getDatePublication(){
+    public String getDatePublication() {
         return this.datePublication;
     }
-    public void setDatePublication(LocalDateTime datePublication){
+
+    public void setDatePublication(String datePublication) {
         this.datePublication = datePublication;
     }
-    public LocalDateTime getDatePublicationFrom(){
+
+    public String getDatePublicationFrom() {
         return this.datePublicationFrom;
     }
-    public void setDatePublicationFrom(LocalDateTime datePublicationFrom){
+
+    public void setDatePublicationFrom(String datePublicationFrom) {
         this.datePublicationFrom = datePublicationFrom;
     }
-    public LocalDateTime getDatePublicationTo(){
+
+    public String getDatePublicationTo() {
         return this.datePublicationTo;
     }
-    public void setDatePublicationTo(LocalDateTime datePublicationTo){
+
+    public void setDatePublicationTo(String datePublicationTo) {
         this.datePublicationTo = datePublicationTo;
     }
-    public LocalDateTime getDateCreation(){
+
+    public String getDateCreation() {
         return this.dateCreation;
     }
-    public void setDateCreation(LocalDateTime dateCreation){
+
+    public void setDateCreation(String dateCreation) {
         this.dateCreation = dateCreation;
     }
-    public LocalDateTime getDateCreationFrom(){
+
+    public String getDateCreationFrom() {
         return this.dateCreationFrom;
     }
-    public void setDateCreationFrom(LocalDateTime dateCreationFrom){
+
+    public void setDateCreationFrom(String dateCreationFrom) {
         this.dateCreationFrom = dateCreationFrom;
     }
-    public LocalDateTime getDateCreationTo(){
+
+    public String getDateCreationTo() {
         return this.dateCreationTo;
     }
-    public void setDateCreationTo(LocalDateTime dateCreationTo){
+
+    public void setDateCreationTo(String dateCreationTo) {
         this.dateCreationTo = dateCreationTo;
     }
-    public String getDescription(){
+
+    public String getDescription() {
         return this.description;
     }
-    public void setDescription(String description){
+
+    public void setDescription(String description) {
         this.description = description;
     }
-    public String getDescriptionLike(){
+
+    public String getDescriptionLike() {
         return this.descriptionLike;
     }
-    public void setDescriptionLike(String descriptionLike){
+
+    public void setDescriptionLike(String descriptionLike) {
         this.descriptionLike = descriptionLike;
     }
 
-    public String getCode(){
+    public String getCode() {
         return this.code;
     }
-    public void setCode(String code){
+
+    public void setCode(String code) {
         this.code = code;
     }
-    public String getCodeLike(){
+
+    public String getCodeLike() {
         return this.codeLike;
     }
-    public void setCodeLike(String codeLike){
+
+    public void setCodeLike(String codeLike) {
         this.codeLike = codeLike;
     }
 
-    public String getLibelle(){
+    public String getLibelle() {
         return this.libelle;
     }
-    public void setLibelle(String libelle){
+
+    public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
-    public String getLibelleLike(){
+
+    public String getLibelleLike() {
         return this.libelleLike;
     }
-    public void setLibelleLike(String libelleLike){
+
+    public void setLibelleLike(String libelleLike) {
         this.libelleLike = libelleLike;
     }
 
-    public String getNumeroOrder(){
+    public String getNumeroOrder() {
         return this.numeroOrder;
     }
-    public void setNumeroOrder(String numeroOrder){
+
+    public void setNumeroOrder(String numeroOrder) {
         this.numeroOrder = numeroOrder;
-    }   
-    public String getNumeroOrderMin(){
+    }
+
+    public String getNumeroOrderMin() {
         return this.numeroOrderMin;
     }
-    public void setNumeroOrderMin(String numeroOrderMin){
+
+    public void setNumeroOrderMin(String numeroOrderMin) {
         this.numeroOrderMin = numeroOrderMin;
     }
-    public String getNumeroOrderMax(){
+
+    public String getNumeroOrderMax() {
         return this.numeroOrderMax;
     }
-    public void setNumeroOrderMax(String numeroOrderMax){
+
+    public void setNumeroOrderMax(String numeroOrderMax) {
         this.numeroOrderMax = numeroOrderMax;
     }
-      
-    public String getNombreCours(){
+
+    public String getNombreCours() {
         return this.nombreCours;
     }
-    public void setNombreCours(String nombreCours){
+
+    public void setNombreCours(String nombreCours) {
         this.nombreCours = nombreCours;
-    }   
-    public String getNombreCoursMin(){
+    }
+
+    public String getNombreCoursMin() {
         return this.nombreCoursMin;
     }
-    public void setNombreCoursMin(String nombreCoursMin){
+
+    public void setNombreCoursMin(String nombreCoursMin) {
         this.nombreCoursMin = nombreCoursMin;
     }
-    public String getNombreCoursMax(){
+
+    public String getNombreCoursMax() {
         return this.nombreCoursMax;
     }
-    public void setNombreCoursMax(String nombreCoursMax){
+
+    public void setNombreCoursMax(String nombreCoursMax) {
         this.nombreCoursMax = nombreCoursMax;
     }
-      
 
-    public CentreCriteria getCentre(){
+
+    public CentreCriteria getCentre() {
         return this.centre;
     }
 
-    public void setCentre(CentreCriteria centre){
+    public void setCentre(CentreCriteria centre) {
         this.centre = centre;
     }
-    public List<CentreCriteria> getCentres(){
+
+    public List<CentreCriteria> getCentres() {
         return this.centres;
     }
 
-    public void setCentres(List<CentreCriteria> centres){
+    public void setCentres(List<CentreCriteria> centres) {
         this.centres = centres;
     }
 }

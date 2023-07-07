@@ -2,6 +2,7 @@ package ma.zsmart.engflexy.zynerator.specification;
 
 import ma.zsmart.engflexy.zynerator.bean.BusinessObject;
 import ma.zsmart.engflexy.zynerator.criteria.BaseCriteria;
+import ma.zsmart.engflexy.zynerator.util.DateUtil;
 import ma.zsmart.engflexy.zynerator.util.ListUtil;
 import ma.zsmart.engflexy.zynerator.util.NumberUtil;
 import ma.zsmart.engflexy.zynerator.util.StringUtil;
@@ -45,6 +46,20 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
     public void addPredicate(String name, LocalDateTime value, LocalDateTime valueMin, LocalDateTime valueMax) {
         addPredicate(name, value);
         addPredicate(name, valueMin, valueMax);
+    }
+
+    private LocalDateTime todate(String str) {
+        return DateUtil.stringEnToDate(str);
+    }
+
+    // this function for dates that are in string type
+    public void addPredicate(String name, String value, String valueMin, String valueMax) {
+        LocalDateTime valueDate = todate(value);
+        LocalDateTime valuemaxDate = todate(valueMax);
+        LocalDateTime valueminDate = todate(valueMin);
+
+        addPredicate(name, valueDate);
+        addPredicate(name, valueminDate, valuemaxDate);
     }
 
     public void addPredicateLong(String name, String value, String valueMin, String valueMax) {

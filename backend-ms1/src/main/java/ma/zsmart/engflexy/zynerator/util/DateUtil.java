@@ -45,6 +45,9 @@ public class DateUtil {
     }
 
     public static LocalDateTime stringEnToDate(final String strDate) {
+        if (StringUtil.isEmpty(strDate)) {
+            return null;
+        }
         DateTimeFormatter formatter;
         if (Pattern.matches(DATE_FORMAT_WITH_HOUR_PATTERN, strDate)) {
             formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_HOUR, Locale.ENGLISH);
