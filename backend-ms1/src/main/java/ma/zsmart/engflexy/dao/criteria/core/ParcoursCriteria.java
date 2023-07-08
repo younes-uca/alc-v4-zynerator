@@ -4,8 +4,8 @@ package ma.zsmart.engflexy.dao.criteria.core;
 import ma.zsmart.engflexy.zynerator.criteria.BaseCriteria;
 import ma.zsmart.engflexy.zynerator.util.DateUtil;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.time.LocalDate;
 
 public class ParcoursCriteria extends BaseCriteria {
 
@@ -15,6 +15,7 @@ public class ParcoursCriteria extends BaseCriteria {
     private String dateCreation;
     private String dateCreationFrom;
     private String dateCreationTo;
+
     private String description;
     private String descriptionLike;
     private String code;
@@ -35,48 +36,50 @@ public class ParcoursCriteria extends BaseCriteria {
     public ParcoursCriteria() {
     }
 
-    public String getDatePublication() {
-        return this.datePublication;
+    private LocalDateTime todate(String str) {return DateUtil.stringEnToDate(str);}
+
+    public LocalDateTime getDatePublication() {
+        return todate(this.datePublication);
     }
 
     public void setDatePublication(String datePublication) {
         this.datePublication = datePublication;
     }
 
-    public String getDatePublicationFrom() {
-        return this.datePublicationFrom;
+    public LocalDateTime getDatePublicationFrom() {
+        return todate(this.datePublicationFrom);
     }
 
     public void setDatePublicationFrom(String datePublicationFrom) {
         this.datePublicationFrom = datePublicationFrom;
     }
 
-    public String getDatePublicationTo() {
-        return this.datePublicationTo;
+    public LocalDateTime getDatePublicationTo() {
+        return todate(this.datePublicationTo);
     }
 
     public void setDatePublicationTo(String datePublicationTo) {
         this.datePublicationTo = datePublicationTo;
     }
 
-    public String getDateCreation() {
-        return this.dateCreation;
+    public LocalDateTime getDateCreation() {
+        return todate(this.dateCreation);
     }
 
     public void setDateCreation(String dateCreation) {
         this.dateCreation = dateCreation;
     }
 
-    public String getDateCreationFrom() {
-        return this.dateCreationFrom;
+    public LocalDateTime getDateCreationFrom() {
+        return todate(this.dateCreationFrom);
     }
 
     public void setDateCreationFrom(String dateCreationFrom) {
         this.dateCreationFrom = dateCreationFrom;
     }
 
-    public String getDateCreationTo() {
-        return this.dateCreationTo;
+    public LocalDateTime getDateCreationTo() {
+        return todate(this.dateCreationTo);
     }
 
     public void setDateCreationTo(String dateCreationTo) {

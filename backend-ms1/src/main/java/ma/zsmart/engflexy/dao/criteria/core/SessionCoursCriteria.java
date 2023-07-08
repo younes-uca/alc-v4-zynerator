@@ -1,12 +1,13 @@
-package  ma.zsmart.engflexy.dao.criteria.core;
+package ma.zsmart.engflexy.dao.criteria.core;
 
 
 import ma.zsmart.engflexy.zynerator.criteria.BaseCriteria;
+import ma.zsmart.engflexy.zynerator.util.DateUtil;
+
 import java.util.List;
 import java.time.LocalDateTime;
-import java.time.LocalDate;
 
-public class SessionCoursCriteria extends  BaseCriteria  {
+public class SessionCoursCriteria extends BaseCriteria {
 
     private String reference;
     private String referenceLike;
@@ -22,212 +23,260 @@ public class SessionCoursCriteria extends  BaseCriteria  {
     private String annee;
     private String anneeMin;
     private String anneeMax;
-    private LocalDateTime dateFin;
-    private LocalDateTime dateFinFrom;
-    private LocalDateTime dateFinTo;
-    private LocalDateTime dateDebut;
-    private LocalDateTime dateDebutFrom;
-    private LocalDateTime dateDebutTo;
+
+    private String dateFin;
+    private String dateFinFrom;
+    private String dateFinTo;
+    private String dateDebut;
+    private String dateDebutFrom;
+    private String dateDebutTo;
     private Boolean payer;
 
-    private ProfCriteria prof ;
-    private List<ProfCriteria> profs ;
-    private CoursCriteria cours ;
-    private List<CoursCriteria> courss ;
-    private GroupeEtudiantCriteria groupeEtudiant ;
-    private List<GroupeEtudiantCriteria> groupeEtudiants ;
-    private SalaryCriteria salary ;
-    private List<SalaryCriteria> salarys ;
+    private ProfCriteria prof;
+    private List<ProfCriteria> profs;
+    private CoursCriteria cours;
+    private List<CoursCriteria> courss;
+    private GroupeEtudiantCriteria groupeEtudiant;
+    private List<GroupeEtudiantCriteria> groupeEtudiants;
+    private SalaryCriteria salary;
+    private List<SalaryCriteria> salarys;
 
+    public SessionCoursCriteria() {
+    }
 
-    public SessionCoursCriteria(){}
-
-    public String getReference(){
+    public String getReference() {
         return this.reference;
     }
-    public void setReference(String reference){
+
+    public void setReference(String reference) {
         this.reference = reference;
     }
-    public String getReferenceLike(){
+
+    public String getReferenceLike() {
         return this.referenceLike;
     }
-    public void setReferenceLike(String referenceLike){
+
+    public void setReferenceLike(String referenceLike) {
         this.referenceLike = referenceLike;
     }
 
-    public String getDuree(){
+    public String getDuree() {
         return this.duree;
     }
-    public void setDuree(String duree){
+
+    public void setDuree(String duree) {
         this.duree = duree;
-    }   
-    public String getDureeMin(){
+    }
+
+    public String getDureeMin() {
         return this.dureeMin;
     }
-    public void setDureeMin(String dureeMin){
+
+    public void setDureeMin(String dureeMin) {
         this.dureeMin = dureeMin;
     }
-    public String getDureeMax(){
+
+    public String getDureeMax() {
         return this.dureeMax;
     }
-    public void setDureeMax(String dureeMax){
+
+    public void setDureeMax(String dureeMax) {
         this.dureeMax = dureeMax;
     }
-      
-    public String getTotalheure(){
+
+    public String getTotalheure() {
         return this.totalheure;
     }
-    public void setTotalheure(String totalheure){
+
+    public void setTotalheure(String totalheure) {
         this.totalheure = totalheure;
-    }   
-    public String getTotalheureMin(){
+    }
+
+    public String getTotalheureMin() {
         return this.totalheureMin;
     }
-    public void setTotalheureMin(String totalheureMin){
+
+    public void setTotalheureMin(String totalheureMin) {
         this.totalheureMin = totalheureMin;
     }
-    public String getTotalheureMax(){
+
+    public String getTotalheureMax() {
         return this.totalheureMax;
     }
-    public void setTotalheureMax(String totalheureMax){
+
+    public void setTotalheureMax(String totalheureMax) {
         this.totalheureMax = totalheureMax;
     }
-      
-    public String getMois(){
+
+    public String getMois() {
         return this.mois;
     }
-    public void setMois(String mois){
+
+    public void setMois(String mois) {
         this.mois = mois;
-    }   
-    public String getMoisMin(){
+    }
+
+    public String getMoisMin() {
         return this.moisMin;
     }
-    public void setMoisMin(String moisMin){
+
+    public void setMoisMin(String moisMin) {
         this.moisMin = moisMin;
     }
-    public String getMoisMax(){
+
+    public String getMoisMax() {
         return this.moisMax;
     }
-    public void setMoisMax(String moisMax){
+
+    public void setMoisMax(String moisMax) {
         this.moisMax = moisMax;
     }
-      
-    public String getAnnee(){
+
+    public String getAnnee() {
         return this.annee;
     }
-    public void setAnnee(String annee){
+
+    public void setAnnee(String annee) {
         this.annee = annee;
-    }   
-    public String getAnneeMin(){
+    }
+
+    public String getAnneeMin() {
         return this.anneeMin;
     }
-    public void setAnneeMin(String anneeMin){
+
+    public void setAnneeMin(String anneeMin) {
         this.anneeMin = anneeMin;
     }
-    public String getAnneeMax(){
+
+    public String getAnneeMax() {
         return this.anneeMax;
     }
-    public void setAnneeMax(String anneeMax){
+
+    public void setAnneeMax(String anneeMax) {
         this.anneeMax = anneeMax;
     }
-      
-    public LocalDateTime getDateFin(){
-        return this.dateFin;
+
+    private LocalDateTime todate(String str) {
+        return DateUtil.stringEnToDate(str);
     }
-    public void setDateFin(LocalDateTime dateFin){
+
+    public LocalDateTime getDateFin() {
+        return todate(this.dateFin);
+    }
+
+    public void setDateFin(String dateFin) {
         this.dateFin = dateFin;
     }
-    public LocalDateTime getDateFinFrom(){
-        return this.dateFinFrom;
+
+    public LocalDateTime getDateFinFrom() {
+        return todate(this.dateFinFrom);
     }
-    public void setDateFinFrom(LocalDateTime dateFinFrom){
+
+    public void setDateFinFrom(String dateFinFrom) {
         this.dateFinFrom = dateFinFrom;
     }
-    public LocalDateTime getDateFinTo(){
-        return this.dateFinTo;
+
+    public LocalDateTime getDateFinTo() {
+        return todate(this.dateFinTo);
     }
-    public void setDateFinTo(LocalDateTime dateFinTo){
+
+    public void setDateFinTo(String dateFinTo) {
         this.dateFinTo = dateFinTo;
     }
-    public LocalDateTime getDateDebut(){
-        return this.dateDebut;
+
+    public LocalDateTime getDateDebut() {
+        return todate(this.dateDebut);
     }
-    public void setDateDebut(LocalDateTime dateDebut){
+
+    public void setDateDebut(String dateDebut) {
         this.dateDebut = dateDebut;
     }
-    public LocalDateTime getDateDebutFrom(){
-        return this.dateDebutFrom;
+
+    public LocalDateTime getDateDebutFrom() {
+        return todate(this.dateDebutFrom);
     }
-    public void setDateDebutFrom(LocalDateTime dateDebutFrom){
+
+    public void setDateDebutFrom(String dateDebutFrom) {
         this.dateDebutFrom = dateDebutFrom;
     }
-    public LocalDateTime getDateDebutTo(){
-        return this.dateDebutTo;
+
+    public LocalDateTime getDateDebutTo() {
+        return todate(this.dateDebutTo);
     }
-    public void setDateDebutTo(LocalDateTime dateDebutTo){
+
+    public void setDateDebutTo(String dateDebutTo) {
         this.dateDebutTo = dateDebutTo;
     }
-    public Boolean getPayer(){
+
+    public Boolean getPayer() {
         return this.payer;
     }
-    public void setPayer(Boolean payer){
+
+    public void setPayer(Boolean payer) {
         this.payer = payer;
     }
 
-    public ProfCriteria getProf(){
+    public ProfCriteria getProf() {
         return this.prof;
     }
 
-    public void setProf(ProfCriteria prof){
+    public void setProf(ProfCriteria prof) {
         this.prof = prof;
     }
-    public List<ProfCriteria> getProfs(){
+
+    public List<ProfCriteria> getProfs() {
         return this.profs;
     }
 
-    public void setProfs(List<ProfCriteria> profs){
+    public void setProfs(List<ProfCriteria> profs) {
         this.profs = profs;
     }
-    public CoursCriteria getCours(){
+
+    public CoursCriteria getCours() {
         return this.cours;
     }
 
-    public void setCours(CoursCriteria cours){
+    public void setCours(CoursCriteria cours) {
         this.cours = cours;
     }
-    public List<CoursCriteria> getCourss(){
+
+    public List<CoursCriteria> getCourss() {
         return this.courss;
     }
 
-    public void setCourss(List<CoursCriteria> courss){
+    public void setCourss(List<CoursCriteria> courss) {
         this.courss = courss;
     }
-    public GroupeEtudiantCriteria getGroupeEtudiant(){
+
+    public GroupeEtudiantCriteria getGroupeEtudiant() {
         return this.groupeEtudiant;
     }
 
-    public void setGroupeEtudiant(GroupeEtudiantCriteria groupeEtudiant){
+    public void setGroupeEtudiant(GroupeEtudiantCriteria groupeEtudiant) {
         this.groupeEtudiant = groupeEtudiant;
     }
-    public List<GroupeEtudiantCriteria> getGroupeEtudiants(){
+
+    public List<GroupeEtudiantCriteria> getGroupeEtudiants() {
         return this.groupeEtudiants;
     }
 
-    public void setGroupeEtudiants(List<GroupeEtudiantCriteria> groupeEtudiants){
+    public void setGroupeEtudiants(List<GroupeEtudiantCriteria> groupeEtudiants) {
         this.groupeEtudiants = groupeEtudiants;
     }
-    public SalaryCriteria getSalary(){
+
+    public SalaryCriteria getSalary() {
         return this.salary;
     }
 
-    public void setSalary(SalaryCriteria salary){
+    public void setSalary(SalaryCriteria salary) {
         this.salary = salary;
     }
-    public List<SalaryCriteria> getSalarys(){
+
+    public List<SalaryCriteria> getSalarys() {
         return this.salarys;
     }
 
-    public void setSalarys(List<SalaryCriteria> salarys){
+    public void setSalarys(List<SalaryCriteria> salarys) {
         this.salarys = salarys;
     }
 }

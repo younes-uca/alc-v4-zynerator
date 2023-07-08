@@ -48,20 +48,6 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
         addPredicate(name, valueMin, valueMax);
     }
 
-    private LocalDateTime todate(String str) {
-        return DateUtil.stringEnToDate(str);
-    }
-
-    // this function for dates that are in string type
-    public void addPredicate(String name, String value, String valueMin, String valueMax) {
-        LocalDateTime valueDate = todate(value);
-        LocalDateTime valuemaxDate = todate(valueMax);
-        LocalDateTime valueminDate = todate(valueMin);
-
-        addPredicate(name, valueDate);
-        addPredicate(name, valueminDate, valuemaxDate);
-    }
-
     public void addPredicateLong(String name, String value, String valueMin, String valueMax) {
         addPredicate(name, value);
         addPredicateLong(name, valueMin, valueMax);

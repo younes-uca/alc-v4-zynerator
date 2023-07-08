@@ -4,13 +4,6 @@ import ma.zsmart.engflexy.zynerator.specification.AbstractSpecification;
 import ma.zsmart.engflexy.dao.criteria.core.ParcoursCriteria;
 import ma.zsmart.engflexy.bean.core.Parcours;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.List;
-
 public class ParcoursSpecification extends  AbstractSpecification<ParcoursCriteria, Parcours>  {
 
     @Override
@@ -34,5 +27,4 @@ public class ParcoursSpecification extends  AbstractSpecification<ParcoursCriter
     public ParcoursSpecification(ParcoursCriteria criteria, boolean distinct) {
         super(criteria, distinct);
     }
-
 }
