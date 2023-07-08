@@ -3,6 +3,7 @@ import {DashboardStudentComponent} from "./dashboard-student/dashboard-student.c
 import {StudentClassesComponent} from "./student-classes/student-classes.component";
 import {StudentComponent} from "./student.component";
 import {MyWordsComponent} from "./my-words/my-words.component";
+import {SettingsComponent} from "../../auth/settings/settings.component";
 
 export default [
     {
@@ -20,6 +21,10 @@ export default [
             {
                 path: 'words',
                 component: MyWordsComponent,
+            },
+            {
+                path: 'settings',
+                component: SettingsComponent,
             },
         ]
     }

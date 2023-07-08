@@ -149,7 +149,54 @@
                 </div>
 
             </mat-tab>
-            <mat-tab label="Learned"> Learned</mat-tab>
+            <mat-tab label="Learned">
+
+                <div class="flex">
+                    <h3 class="text-lg font-bold mr-2 tracking-tight text-gray-700">All words learned</h3>
+                    <div class="flex-auto border-b-2 border-dotted border-gray-300">
+                    </div>
+                </div>
+                <div class="mt-12 shadow-sm border rounded-lg overflow-x-auto">
+                    <table class="w-full table-auto text-sm text-left">
+                        <thead class="text-gray-600 font-medium border-b">
+                        <tr>
+                            <th class="py-3 px-6 flex items-center gap-x-4">
+                                <div>
+                                    <mat-checkbox
+                                        class="relative flex w-5 h-5  peer-checked:bg-indigo-600 rounded-md  ring-offset-2 ring-indigo-600 duration-150 peer-active:ring cursor-pointer"></mat-checkbox>
+                                </div>
+                                word
+                            </th>
+                            <th class="py-3 px-6">translation</th>
+                            <th class="py-3 px-6"></th>
+
+                        </tr>
+                        </thead>
+                        <tbody class="text-gray-600 divide-y">
+                        <tr class="odd:bg-gray-50 even:bg-white">
+                            <td class="px-6 py-4 whitespace-nowrap flex items-center gap-x-4">
+                                <div>
+                                    <mat-checkbox
+                                        class="relative flex w-5 h-5  peer-checked:bg-indigo-600 rounded-md  ring-offset-2 ring-indigo-600 duration-150 peer-active:ring cursor-pointer"></mat-checkbox>
+                                </div>
+                                Hello
+                            </td>
+
+                            <td class="px-6 py-4 whitespace-nowrap">مرحبا</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <button matTooltip="Mark as learned" mat-mini-fab class="mr-2" color="primary">
+                                    <mat-icon>check</mat-icon>
+                                </button>
+
+                                <button matTooltip="delete" mat-mini-fab color="warn">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                        </tbody>
+                    </table>
+                </div>
+
+            </mat-tab>
         </mat-tab-group>
     </div>
 </main>

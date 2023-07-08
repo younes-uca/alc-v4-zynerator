@@ -29,12 +29,18 @@ export const studentNavigation: FuseNavigationItem[] = [
         type: 'basic',
         icon: 'heroicons_outline:briefcase',
         link: 'student/classes'
-    },{
+    }, {
         id: 'my words',
         title: 'My words',
         type: 'basic',
         icon: 'heroicons_outline:book-open',
         link: 'student/words'
+    }, {
+        id: 'settings',
+        title: 'Settings',
+        type: 'basic',
+        icon: 'heroicons_outline:cog-6-tooth',
+        link: 'student/settings'
     }
 ];
 
