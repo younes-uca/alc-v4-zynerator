@@ -47,7 +47,7 @@ export class QuizViewAdminComponent extends AbstractViewController<QuizDto, Quiz
         this.quizEtudiants.etudiant = new EtudiantDto();
         this.etudiantService.findAll().subscribe((data) => this.etudiants = data);
         this.section = new SectionDto();
-        this.sectionService.findAll().subscribe((data) => this.sections = data);
+        this.sectionService.findNeededQuiz().subscribe((data) => this.sections = data);
     }
 
 
@@ -58,10 +58,10 @@ export class QuizViewAdminComponent extends AbstractViewController<QuizDto, Quiz
         this.sectionService.item = value;
     }
     get sections():Array<SectionDto> {
-       return this.sectionService.items;
+       return this.quizService.sections;
     }
     set sections(value: Array<SectionDto>) {
-        this.sectionService.items = value;
+        this.quizService.sections = value;
     }
     get etudiant(): EtudiantDto {
        return this.etudiantService.item;

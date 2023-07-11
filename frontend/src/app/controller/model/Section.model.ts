@@ -3,6 +3,7 @@ import {CategorieSectionDto} from './CategorieSection.model';
 import {CoursDto} from './Cours.model';
 import {SectionItemDto} from './SectionItem.model';
 import {BaseDto} from 'src/app/zynerator/dto/BaseDto.model';
+import {SectionStatus} from "../utils/enums";
 
 
 export class SectionDto extends BaseDto {
@@ -31,4 +32,5 @@ export class SectionDto extends BaseDto {
     public sessionCours: SessionCoursDto;
     public sectionItems: Array<SectionItemDto>;
     public status: string;
+    public quizExist: boolean;
 }

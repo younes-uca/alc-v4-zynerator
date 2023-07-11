@@ -60,7 +60,7 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
     }
 
     public void deleteByIdIn(List<Long> ids) {
-        //dao.deleteByIdIn(ids);
+//        dao.deleteByIdIn(ids);
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
@@ -142,8 +142,15 @@ public abstract class AbstractServiceImpl<T extends AuditBusinessObject, H exten
         }
     }
 
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
+    public T edit(T t) {
+        return dao.save(t);
+    }
+
     public T findById(Long id) {
-    Optional<T> item = dao.findById(id);
+        if (id == null) return null;
+        Optional<T> item = dao.findById(id);
         return item.orElse(null);
     }
 

@@ -13,11 +13,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "section")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@SequenceGenerator(name = "section_seq", sequenceName = "section_seq", allocationSize = 1, initialValue = 1)
+@SequenceGenerator(name = "section_seq", sequenceName = "section_seq", allocationSize = 1)
 public class Section extends AuditBusinessObject {
 
     private Long id;
-
     @Column(length = 500)
     private String code;
     @Column(length = 500)
@@ -41,14 +40,11 @@ public class Section extends AuditBusinessObject {
     private Integer content = 0;
     @Enumerated(EnumType.STRING)
     private SectionStatus status;
+    private boolean quizExist = false;
 
     private CategorieSection categorieSection;
-
     private Cours cours;
-
     private SessionCours sessionCours;
-
-
     private List<SectionItem> sectionItems;
 
     public Section() {
@@ -59,7 +55,6 @@ public class Section extends AuditBusinessObject {
         this.id = id;
         this.code = code;
     }
-
 
     @Id
     @Column(name = "id")
@@ -208,17 +203,67 @@ public class Section extends AuditBusinessObject {
         return status;
     }
 
-    public void setStatus() {
+    public boolean isQuizExist() {
+        return quizExist;
+    }
+
+    public void setQuizExist(boolean quizExist) {
+        this.quizExist = quizExist;
+    }
+
+    public boolean _isNeedQuiz() {
+        String[] strs = {"let's practice", "life story"};
+        if (getCategorieSection() == null) return false;
+        return StringUtil.contains(categorieSection.getLibelle(), strs);
+    }
+
+    public void updateStatus() {
         this.status = SectionStatus.VALIDATE;
-        if (StringUtil.isEmpty(this.contenu)) {
-            this.status = SectionStatus.CONTENU_MESSING;
-        } else if (StringUtil.isEmpty(this.urlImage) && StringUtil.isEmpty(this.urlVideo)) {
-            this.status = SectionStatus.MEDIA_MESSING;
+        if (_isNeedQuiz()) {
+            if (!quizExist) {
+                this.status = SectionStatus.QUIZ_MESSING;
+            }
+        } else {
+            if (StringUtil.isEmpty(this.contenu)) {
+                this.status = SectionStatus.CONTENU_MESSING;
+            } else if (StringUtil.isEmpty(this.urlImage) && StringUtil.isEmpty(this.urlVideo)) {
+                this.status = SectionStatus.MEDIA_MESSING;
+            }
+        }
+    }
+
+    public void updateQuiz() {
+        if (categorieSection == null || StringUtil.isEmpty(categorieSection.getLibelle()) && !_isNeedQuiz()) {
+            quizExist = false;
         }
     }
 
     public void setStatus(SectionStatus status) {
         this.status = status;
+    }
+
+    public void copyFrom(Section section) {
+        if (section == null) return;
+
+        updateAttr(this, Section::setCode, section.getCode());
+        updateAttr(this, Section::setLibelle, section.getLibelle());
+        updateAttr(this, Section::setUrlImage, section.getUrlImage());
+        updateAttr(this, Section::setUrlImage2, section.getUrlImage2());
+        updateAttr(this, Section::setUrlImage3, section.getUrlImage3());
+        updateAttr(this, Section::setUrlVideo, section.getUrlVideo());
+        updateAttr(this, Section::setContenu, section.getContenu());
+        updateAttr(this, Section::setQuestions, section.getQuestions());
+        updateAttr(this, Section::setIndicationProf, section.getIndicationProf());
+        updateAttr(this, Section::setQuestions, section.getQuestions());
+        updateAttr(this, Section::setNumeroOrder, section.getNumeroOrder());
+        updateAttr(this, Section::setUrl, section.getUrl());
+        updateAttr(this, Section::setContent, section.getContent());
+        updateAttr(this, Section::setStatus, section.getStatus());
+        updateAttr(this, Section::setQuizExist, section.isQuizExist());
+        updateAttr(this, Section::setCategorieSection, section.getCategorieSection());
+        updateAttr(this, Section::setCours, section.getCours());
+        updateAttr(this, Section::setSessionCours, section.getSessionCours());
+        updateAttr(this, Section::setSectionItems, section.getSectionItems());
     }
 
     @Transient

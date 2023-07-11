@@ -8,10 +8,11 @@ import ma.zsmart.engflexy.zynerator.service.IService;
 
 
 public interface QuizAdminService extends  IService<Quiz,QuizCriteria, QuizHistoryCriteria>  {
-
     List<Quiz> findBySectionId(Long id);
     int deleteBySectionId(Long id);
+    @Override
+    Quiz update(Quiz quiz);
 
-
-
+    @Override
+    void deleteById(Long id);
 }

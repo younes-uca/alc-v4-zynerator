@@ -1,5 +1,6 @@
 package ma.zsmart.engflexy.service.impl.admin;
 
+import ma.zsmart.engflexy.bean.core.CategorieSection;
 import ma.zsmart.engflexy.bean.core.Section;
 import ma.zsmart.engflexy.bean.history.SectionHistory;
 import ma.zsmart.engflexy.dao.criteria.core.SectionCriteria;
@@ -8,6 +9,7 @@ import ma.zsmart.engflexy.dao.facade.core.SectionDao;
 import ma.zsmart.engflexy.dao.facade.history.SectionHistoryDao;
 import ma.zsmart.engflexy.dao.specification.core.SectionSpecification;
 import ma.zsmart.engflexy.service.facade.admin.SectionAdminService;
+import ma.zsmart.engflexy.zynerator.exception.EntityNotFoundException;
 import ma.zsmart.engflexy.zynerator.service.AbstractServiceImpl;
 import ma.zsmart.engflexy.zynerator.util.ListUtil;
 import org.springframework.stereotype.Service;
@@ -26,16 +28,21 @@ import ma.zsmart.engflexy.service.facade.admin.SectionItemAdminService;
 import ma.zsmart.engflexy.service.facade.admin.SessionCoursAdminService;
 import ma.zsmart.engflexy.service.facade.admin.CategorieSectionAdminService;
 
-
-import java.util.List;
-
 @Service
 public class SectionAdminServiceImpl extends AbstractServiceImpl<Section, SectionHistory, SectionCriteria, SectionHistoryCriteria, SectionDao,
         SectionHistoryDao> implements SectionAdminService {
 
+    private CategorieSection findCategorieSection(Section section) {
+        if (section == null || section.getId() == null || section.getCategorieSection() == null) return null;
+        Long categorieId = section.getCategorieSection().getId();
+        return categorieSectionService.findById(categorieId);
+    }
+
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class, readOnly = false)
     public Section create(Section t) {
-        t.setStatus();
+        t.setCategorieSection(findCategorieSection(t));
+        t.updateQuiz();
+        t.updateStatus();
         super.create(t);
         if (t.getSectionItems() != null) {
             t.getSectionItems().forEach(element -> {
@@ -44,6 +51,24 @@ public class SectionAdminServiceImpl extends AbstractServiceImpl<Section, Sectio
             });
         }
         return t;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Override
+    public Section update(Section newSection) {
+        Section loadedSection = findById(newSection.getId());
+        if (loadedSection == null) {
+            throw new EntityNotFoundException("errors.notFound", new String[]{itemClass.getSimpleName(), newSection.getId().toString()});
+        } else {
+            loadedSection.copyFrom(newSection);
+            loadedSection.setCategorieSection(findCategorieSection(loadedSection));
+
+            updateWithAssociatedLists(loadedSection);
+            loadedSection.updateStatus();
+
+            dao.save(loadedSection);
+            return loadedSection;
+        }
     }
 
     public Section findWithAssociatedLists(Long id) {
@@ -61,8 +86,6 @@ public class SectionAdminServiceImpl extends AbstractServiceImpl<Section, Sectio
 
     public void updateWithAssociatedLists(Section section) {
         if (section != null && section.getId() != null) {
-            section.setStatus();
-
             List<List<SectionItem>> resultSectionItems = sectionItemService.getToBeSavedAndToBeDeleted(sectionItemService.findBySectionId(section.getId()), section.getSectionItems());
             sectionItemService.delete(resultSectionItems.get(1));
             ListUtil.emptyIfNull(resultSectionItems.get(0)).forEach(e -> e.setSection(section));
@@ -115,5 +138,4 @@ public class SectionAdminServiceImpl extends AbstractServiceImpl<Section, Sectio
     public SectionAdminServiceImpl(SectionDao dao, SectionHistoryDao historyDao) {
         super(dao, historyDao);
     }
-
 }

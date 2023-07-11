@@ -13,6 +13,8 @@ public interface IService<T extends BusinessObject, Criteria extends BaseCriteri
 
     T update(T t);
 
+    T edit(T t);
+
     List<T> update(List<T> ts,boolean createIfNotExist);
 
     T findById(Long id);
@@ -36,6 +38,8 @@ public interface IService<T extends BusinessObject, Criteria extends BaseCriteri
     int getDataSize(Criteria criteria);
 
     void delete(List<T> ts);
+
+    void delete(T ts);
 
     void deleteByIdIn(List<Long> ids);
 

@@ -62,6 +62,14 @@ public class StringUtil {
         return (array != null && array.length > 0);
     }
 
+    public static boolean contains(String str, String[] array) {
+        if (str == null) return false;
+        for (String con: array) {
+            if (str.toLowerCase().contains(con.toLowerCase())) return true;
+        }
+        return false;
+    }
+
     public static boolean isEmail(String email) {
         Pattern p = Pattern.compile(".+@.+\\.[a-z]+");
         Matcher m = p.matcher(email);

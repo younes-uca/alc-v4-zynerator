@@ -21,10 +21,16 @@ import {SectionDto} from '../model/Section.model';
   providedIn: 'root'
 })
 export class QuizService extends AbstractService<QuizDto, QuizCriteria> {
+    private _sections: Array<SectionDto>
+
      constructor(private http: HttpClient, private roleService: RoleService) {
         super();
         this.setHttp(http);
         this.setApi(environment.apiUrl + 'admin/quiz/');
+    }
+
+    public findBySection(section: SectionDto): Observable<Array<QuizDto>> {
+         return this.http.post<Array<QuizDto>>(this.API + 'by-section', section)
     }
 
     public constrcutDto(): QuizDto {
@@ -33,5 +39,15 @@ export class QuizService extends AbstractService<QuizDto, QuizCriteria> {
 
     public constrcutCriteria(): QuizCriteria {
         return new QuizCriteria();
+    }
+
+    get sections(): Array<SectionDto> {
+        if (this._sections == null)
+            this._sections = new Array<SectionDto>()
+        return this._sections;
+    }
+
+    set sections(value: Array<SectionDto>) {
+        this._sections = value;
     }
 }

@@ -1,4 +1,4 @@
-package  ma.zsmart.engflexy.ws.facade.admin;
+package ma.zsmart.engflexy.ws.facade.admin;
 
 
 import io.swagger.annotations.Api;
@@ -10,14 +10,18 @@ import ma.zsmart.engflexy.dao.criteria.history.QuizHistoryCriteria;
 import ma.zsmart.engflexy.service.facade.admin.QuizAdminService;
 import ma.zsmart.engflexy.ws.converter.QuizConverter;
 import ma.zsmart.engflexy.ws.dto.QuizDto;
+import ma.zsmart.engflexy.ws.dto.SectionDto;
 import ma.zsmart.engflexy.zynerator.controller.AbstractController;
 import ma.zsmart.engflexy.zynerator.dto.AuditEntityDto;
 import ma.zsmart.engflexy.zynerator.util.PaginatedList;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.function.Function;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import ma.zsmart.engflexy.zynerator.process.Result;
 
@@ -28,7 +32,7 @@ import ma.zsmart.engflexy.zynerator.dto.FileTempDto;
 @Api("Manages quiz services")
 @RestController
 @RequestMapping("/api/admin/quiz/")
-public class QuizRestAdmin  extends AbstractController<Quiz, QuizDto, QuizHistory, QuizCriteria, QuizHistoryCriteria, QuizAdminService, QuizConverter> {
+public class QuizRestAdmin extends AbstractController<Quiz, QuizDto, QuizHistory, QuizCriteria, QuizHistoryCriteria, QuizAdminService, QuizConverter> {
 
 
     @ApiOperation("upload one quiz")
@@ -36,6 +40,7 @@ public class QuizRestAdmin  extends AbstractController<Quiz, QuizDto, QuizHistor
     public ResponseEntity<FileTempDto> uploadFileAndGetChecksum(@RequestBody MultipartFile file) throws Exception {
         return super.uploadFileAndGetChecksum(file);
     }
+
     @ApiOperation("upload multiple quizs")
     @RequestMapping(value = "upload-multiple", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<List<FileTempDto>> uploadMultipleFileAndGetChecksum(@RequestBody MultipartFile[] files) throws Exception {
@@ -59,6 +64,7 @@ public class QuizRestAdmin  extends AbstractController<Quiz, QuizDto, QuizHistor
     public ResponseEntity<QuizDto> findById(@PathVariable Long id, String[] includes, String[] excludes) throws Exception {
         return super.findById(id, includes, excludes);
     }
+
     @ApiOperation("Saves the specified  quiz")
     @PostMapping("")
     public ResponseEntity<QuizDto> save(@RequestBody QuizDto dto) throws Exception {
@@ -68,42 +74,58 @@ public class QuizRestAdmin  extends AbstractController<Quiz, QuizDto, QuizHistor
     @ApiOperation("Updates the specified  quiz")
     @PutMapping("")
     public ResponseEntity<QuizDto> update(@RequestBody QuizDto dto) throws Exception {
-        return super.update(dto);
+        return super.applyProcess(service::update, dto);
     }
 
     @ApiOperation("Delete list of quiz")
     @PostMapping("multiple")
     public ResponseEntity<List<QuizDto>> delete(@RequestBody List<QuizDto> listToDelete) throws Exception {
-        return super.delete(listToDelete);
+        HttpStatus status = HttpStatus.CONFLICT;
+        if (listToDelete != null && listToDelete.size() > 0) {
+            List<Quiz> items = converter.toItem(listToDelete);
+            service.delete(items);
+            status = HttpStatus.OK;
+        }
+        return new ResponseEntity<>(listToDelete, status);
     }
+
     @ApiOperation("Delete the specified quiz")
     @DeleteMapping("")
     public ResponseEntity<QuizDto> delete(@RequestBody QuizDto dto) throws Exception {
-            return super.delete(dto);
+        HttpStatus status = HttpStatus.CONFLICT;
+        if (dto != null) {
+            Quiz item = converter.toItem(dto);
+            service.delete(item);
+            status = HttpStatus.OK;
+        }
+        return new ResponseEntity<>(dto, status);
     }
 
     @ApiOperation("Delete the specified quiz")
     @DeleteMapping("id/{id}")
     public ResponseEntity<Long> deleteById(@PathVariable Long id) throws Exception {
-        return super.deleteById(id);
+        return super.deleteProcess(id, service::deleteById);
     }
+
     @ApiOperation("Delete multiple quizs by ids")
     @DeleteMapping("multiple/id")
     public ResponseEntity<List<Long>> deleteByIdIn(@RequestBody List<Long> ids) throws Exception {
-            return super.deleteByIdIn(ids);
-     }
+        return super.deleteProcess(ids, service::deleteByIdIn);
+    }
 
 
     @ApiOperation("find by section id")
     @GetMapping("section/id/{id}")
-    public List<Quiz> findBySectionId(@PathVariable Long id){
+    public List<Quiz> findBySectionId(@PathVariable Long id) {
         return service.findBySectionId(id);
     }
+
     @ApiOperation("delete by section id")
     @DeleteMapping("section/id/{id}")
-    public int deleteBySectionId(@PathVariable Long id){
+    public int deleteBySectionId(@PathVariable Long id) {
         return service.deleteBySectionId(id);
     }
+
     @ApiOperation("Finds a quiz and associated list by id")
     @GetMapping("detail/id/{id}")
     public ResponseEntity<QuizDto> findWithAssociatedLists(@PathVariable Long id) {
@@ -157,9 +179,14 @@ public class QuizRestAdmin  extends AbstractController<Quiz, QuizDto, QuizHistor
     public ResponseEntity<Integer> getHistoryDataSize(@RequestBody QuizHistoryCriteria criteria) throws Exception {
         return super.getHistoryDataSize(criteria);
     }
-    public QuizRestAdmin (QuizAdminService service, QuizConverter converter) {
-        super(service, converter);
+
+    @ApiOperation("Gets quiz history data size by criteria")
+    @PostMapping("by-section")
+    public ResponseEntity<List<QuizDto>> getHistoryDataSize(@RequestBody SectionDto section) throws Exception {
+        return super.findListByChildId(service::findBySectionId, section.getId());
     }
 
-
+    public QuizRestAdmin(QuizAdminService service, QuizConverter converter) {
+        super(service, converter);
+    }
 }

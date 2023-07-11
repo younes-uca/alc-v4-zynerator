@@ -13,7 +13,10 @@ import {SessionCoursDto} from 'src/app/controller/model/SessionCours.model';
 import {CategorieSectionDto} from 'src/app/controller/model/CategorieSection.model';
 import {CoursDto} from 'src/app/controller/model/Cours.model';
 import {SECTION_STATUS_LIST} from "../../../../../../controller/utils/enums";
-
+import {ServiceLocator} from "../../../../../../zynerator/service/ServiceLocator";
+import {StringUtilService} from "../../../../../../zynerator/util/StringUtil.service";
+import {QuizDto} from "../../../../../../controller/model/Quiz.model";
+import {QuizService} from "../../../../../../controller/service/Quiz.service";
 
 @Component({
     selector: 'app-section-list-admin',
@@ -25,15 +28,17 @@ export class SectionListAdminComponent extends AbstractListController<SectionDto
     categorieSections: Array<CategorieSectionDto>;
     courss: Array<CoursDto>;
     sessionCourss: Array<SessionCoursDto>;
-    sectionStatuses = SECTION_STATUS_LIST
+    sectionStatuses = SECTION_STATUS_LIST;
 
     constructor(
         sectionService: SectionService,
         private categorieSectionService: CategorieSectionService,
         private coursService: CoursService,
         private sessionCoursService: SessionCoursService,
+        private quizService: QuizService
     ) {
         super(sectionService);
+        this.stringUtilService= ServiceLocator.injector.get(StringUtilService);
     }
 
     ngOnInit(): void {
@@ -41,7 +46,6 @@ export class SectionListAdminComponent extends AbstractListController<SectionDto
         this.initExport();
         this.initCol();
         this.loadCategorieSection();
-        this.loadCours();
         this.loadSessionCours();
     }
 
@@ -143,5 +147,61 @@ export class SectionListAdminComponent extends AbstractListController<SectionDto
             'Content Max': this.criteria.contentMax ? this.criteria.contentMax : environment.emptyForExport,
             //'Session cours': this.criteria.sessionCours?.reference ? this.criteria.sessionCours?.reference : environment.emptyForExport ,
         }];
+    }
+
+    public async openCreateQuiz(section: SectionDto) {
+        const isPermistted = await this.roleService.isPermitted('Quiz', 'add');
+        if (isPermistted) {
+            let quiz = new QuizDto();
+            quiz.section = section;
+            this.quiz = quiz;
+            this.createQuizDialog = true;
+        } else {
+            this.messageService.add({
+                severity: 'error', summary: 'erreur', detail: 'problème de permission'
+            });
+        }
+    }
+
+    public async openEditQuiz(section: SectionDto) {
+        const isPermistted = await this.roleService.isPermitted('Quiz', 'edit');
+        if (isPermistted) {
+            this.quizService.findBySection(section).subscribe(
+                result => {
+                    this.quiz = result.map(quiz => {
+                        if (quiz.section.id == section.id) return quiz;
+                    })[0];
+                    this.editeQuizDialog = true;
+                },
+                error => console.log(error)
+            )
+        } else {
+            this.messageService.add({
+                severity: 'error', summary: 'erreur', detail: 'problème de permission'
+            });
+        }
+    }
+
+    isNeedQuiz(sec: SectionDto): boolean {
+        if (sec == null || sec.categorieSection == null) return false;
+        const strs = ["let's practice", "life story"]
+        return this.stringUtilService.contains(sec.categorieSection.libelle, strs)
+    }
+
+    get quiz(): QuizDto {
+        return this.quizService.item;
+    }
+
+
+    set quiz(quiz: QuizDto) {
+        this.quizService.item = quiz;
+    }
+
+    set createQuizDialog(value: boolean) {
+        this.quizService.createDialog = value;
+    }
+
+    set editeQuizDialog(value: boolean) {
+        this.quizService.editDialog = value;
     }
 }

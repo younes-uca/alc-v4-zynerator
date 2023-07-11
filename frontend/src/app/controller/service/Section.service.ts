@@ -35,4 +35,8 @@ export class SectionService extends AbstractService<SectionDto, SectionCriteria>
     public constrcutCriteria(): SectionCriteria {
         return new SectionCriteria();
     }
+
+    public findNeededQuiz(): Observable<Array<SectionDto>> {
+        return this.http.get<Array<SectionDto>>(this.API + 'need-quiz')
+    }
 }

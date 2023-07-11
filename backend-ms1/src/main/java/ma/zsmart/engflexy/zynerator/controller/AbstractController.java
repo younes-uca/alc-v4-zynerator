@@ -1,5 +1,8 @@
 package ma.zsmart.engflexy.zynerator.controller;
 
+import io.micrometer.core.lang.Nullable;
+import ma.zsmart.engflexy.bean.core.Quiz;
+import ma.zsmart.engflexy.ws.dto.QuizDto;
 import ma.zsmart.engflexy.zynerator.audit.AuditBusinessObject;
 import ma.zsmart.engflexy.zynerator.converter.AbstractConverter;
 import ma.zsmart.engflexy.zynerator.criteria.BaseCriteria;
@@ -37,6 +40,7 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 
@@ -408,5 +412,23 @@ public class AbstractController<T extends AuditBusinessObject, DTO extends BaseD
         T t = getter.apply(id);
         DTO dto = converter.toDto(t);
         return ResponseEntity.ok(dto);
+    }
+
+    public ResponseEntity<DTO> applyProcess(Function<T, T> process, DTO dto) {
+        T item = converter.toItem(dto);
+        item = process.apply(item);
+        dto = converter.toDto(item);
+        return ResponseEntity.ok(dto);
+    }
+
+    protected <O> ResponseEntity<O> deleteProcess(O object, Consumer<O> process) throws Exception {
+        ResponseEntity<O> res;
+        HttpStatus status = HttpStatus.CONFLICT;
+        if (object != null) {
+            process.accept(object);
+            status = HttpStatus.OK;
+        }
+        res = new ResponseEntity<>(object, status);
+        return res;
     }
 }

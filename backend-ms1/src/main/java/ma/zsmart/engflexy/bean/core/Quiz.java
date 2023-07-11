@@ -6,17 +6,10 @@ import java.util.List;
 import java.time.LocalDateTime;
 
 
-import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ma.zsmart.engflexy.zynerator.audit.AuditBusinessObject;
 import javax.persistence.*;
-import java.util.Objects;
-
-
+import java.util.function.BiConsumer;
 
 
 @Entity
@@ -119,6 +112,20 @@ public class Quiz   extends AuditBusinessObject     {
     }
     public void setSeuilReussite(Long seuilReussite){
         this.seuilReussite = seuilReussite;
+    }
+
+    public void copyFrom(Quiz quiz) {
+        if (quiz == null) return;
+
+        updateAttr(this, Quiz::setRef, quiz.getRef());
+        updateAttr(this, Quiz::setLib, quiz.getLib());
+        updateAttr(this, Quiz::setDateDebut, quiz.getDateDebut());
+        updateAttr(this, Quiz::setDateFin, quiz.getDateFin());
+        updateAttr(this, Quiz::setNumero, quiz.getNumero());
+        updateAttr(this, Quiz::setSeuilReussite, quiz.getSeuilReussite());
+        updateAttr(this, Quiz::setSection, quiz.getSection());
+        updateAttr(this, Quiz::setQuestions, quiz.getQuestions());
+        updateAttr(this, Quiz::setQuizEtudiants, quiz.getQuizEtudiants());
     }
 
     @Transient

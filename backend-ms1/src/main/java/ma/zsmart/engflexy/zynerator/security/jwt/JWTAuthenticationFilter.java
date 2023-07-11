@@ -38,8 +38,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
             User myUser = new ObjectMapper().readValue(request.getInputStream(), User.class);
-            System.out.println(myUser.getUsername());
-            System.out.println(myUser.getPassword());
+            // System.out.println(myUser.getUsername());
+            // System.out.println(myUser.getPassword());
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(myUser.getUsername(), myUser.getPassword()));
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,7 +74,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withClaim("passwordChanged", passwordChanged)
                 .sign(Algorithm.HMAC256(SecurityParams.SECRET));
         response.addHeader(SecurityParams.JWT_HEADER_NAME, SecurityParams.HEADER_PREFIX + jwt);
-        System.out.println(jwt);
+        // System.out.println(jwt);
     }
 
 }

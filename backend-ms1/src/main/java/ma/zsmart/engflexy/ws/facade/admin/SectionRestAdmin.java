@@ -65,7 +65,7 @@ public class SectionRestAdmin extends AbstractController<Section, SectionDto, Se
     @ApiOperation("Updates the specified  section")
     @PutMapping("")
     public ResponseEntity<SectionDto> update(@RequestBody SectionDto dto) throws Exception {
-        return super.update(dto);
+        return super.applyProcess(service::update, dto);
     }
 
     @ApiOperation("Delete list of section")
@@ -181,6 +181,14 @@ public class SectionRestAdmin extends AbstractController<Section, SectionDto, Se
     @PostMapping("history-data-size")
     public ResponseEntity<Integer> getHistoryDataSize(@RequestBody SectionHistoryCriteria criteria) throws Exception {
         return super.getHistoryDataSize(criteria);
+    }
+
+    @ApiOperation("Gets section that need quiz")
+    @GetMapping("need-quiz")
+    public ResponseEntity<List<SectionDto>> getHistoryDataSize() throws Exception {
+        SectionCriteria criteria = new SectionCriteria();
+        criteria.setCategorieLibelles(List.of("life story", "let's practice"));
+        return super.findByCriteria(criteria);
     }
 
     public SectionRestAdmin(SectionAdminService service, SectionConverter converter) {

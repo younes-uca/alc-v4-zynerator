@@ -1,4 +1,4 @@
-package  ma.zsmart.engflexy.dao.criteria.core;
+package ma.zsmart.engflexy.dao.criteria.core;
 
 
 import ma.zsmart.engflexy.zynerator.criteria.BaseCriteria;
@@ -6,7 +6,7 @@ import ma.zsmart.engflexy.zynerator.enumeration.SectionStatus;
 
 import java.util.List;
 
-public class SectionCriteria extends  BaseCriteria  {
+public class SectionCriteria extends BaseCriteria {
 
     private String code;
     private String codeLike;
@@ -36,232 +36,283 @@ public class SectionCriteria extends  BaseCriteria  {
     private String contentMin;
     private String contentMax;
     private String status;
+    private boolean quizExist;
 
-    private CategorieSectionCriteria categorieSection ;
-    private List<CategorieSectionCriteria> categorieSections ;
-    private CoursCriteria cours ;
-    private List<CoursCriteria> courss ;
-    private SessionCoursCriteria sessionCours ;
-    private List<SessionCoursCriteria> sessionCourss ;
+    private CategorieSectionCriteria categorieSection;
+    private List<CategorieSectionCriteria> categorieSections;
+    private CoursCriteria cours;
+    private List<CoursCriteria> courss;
+    private SessionCoursCriteria sessionCours;
+    private List<SessionCoursCriteria> sessionCourss;
+
+    private List<String> categorieLibelles;
 
 
-    public SectionCriteria(){}
+    public SectionCriteria() {
+    }
 
-    public String getCode(){
+    public String getCode() {
         return this.code;
     }
-    public void setCode(String code){
+
+    public void setCode(String code) {
         this.code = code;
     }
-    public String getCodeLike(){
+
+    public String getCodeLike() {
         return this.codeLike;
     }
-    public void setCodeLike(String codeLike){
+
+    public void setCodeLike(String codeLike) {
         this.codeLike = codeLike;
     }
 
-    public String getLibelle(){
+    public String getLibelle() {
         return this.libelle;
     }
-    public void setLibelle(String libelle){
+
+    public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
-    public String getLibelleLike(){
+
+    public String getLibelleLike() {
         return this.libelleLike;
     }
-    public void setLibelleLike(String libelleLike){
+
+    public void setLibelleLike(String libelleLike) {
         this.libelleLike = libelleLike;
     }
 
-    public String getUrlImage(){
+    public String getUrlImage() {
         return this.urlImage;
     }
-    public void setUrlImage(String urlImage){
+
+    public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
     }
-    public String getUrlImageLike(){
+
+    public String getUrlImageLike() {
         return this.urlImageLike;
     }
-    public void setUrlImageLike(String urlImageLike){
+
+    public void setUrlImageLike(String urlImageLike) {
         this.urlImageLike = urlImageLike;
     }
 
-    public String getUrlImage2(){
+    public String getUrlImage2() {
         return this.urlImage2;
     }
-    public void setUrlImage2(String urlImage2){
+
+    public void setUrlImage2(String urlImage2) {
         this.urlImage2 = urlImage2;
     }
-    public String getUrlImage2Like(){
+
+    public String getUrlImage2Like() {
         return this.urlImage2Like;
     }
-    public void setUrlImage2Like(String urlImage2Like){
+
+    public void setUrlImage2Like(String urlImage2Like) {
         this.urlImage2Like = urlImage2Like;
     }
 
-    public String getUrlImage3(){
+    public String getUrlImage3() {
         return this.urlImage3;
     }
-    public void setUrlImage3(String urlImage3){
+
+    public void setUrlImage3(String urlImage3) {
         this.urlImage3 = urlImage3;
     }
-    public String getUrlImage3Like(){
+
+    public String getUrlImage3Like() {
         return this.urlImage3Like;
     }
-    public void setUrlImage3Like(String urlImage3Like){
+
+    public void setUrlImage3Like(String urlImage3Like) {
         this.urlImage3Like = urlImage3Like;
     }
 
-    public String getUrlVideo(){
+    public String getUrlVideo() {
         return this.urlVideo;
     }
-    public void setUrlVideo(String urlVideo){
+
+    public void setUrlVideo(String urlVideo) {
         this.urlVideo = urlVideo;
     }
-    public String getUrlVideoLike(){
+
+    public String getUrlVideoLike() {
         return this.urlVideoLike;
     }
-    public void setUrlVideoLike(String urlVideoLike){
+
+    public void setUrlVideoLike(String urlVideoLike) {
         this.urlVideoLike = urlVideoLike;
     }
 
-    public String getContenu(){
+    public String getContenu() {
         return this.contenu;
     }
-    public void setContenu(String contenu){
+
+    public void setContenu(String contenu) {
         this.contenu = contenu;
     }
-    public String getContenuLike(){
+
+    public String getContenuLike() {
         return this.contenuLike;
     }
-    public void setContenuLike(String contenuLike){
+
+    public void setContenuLike(String contenuLike) {
         this.contenuLike = contenuLike;
     }
 
-    public String getQuestions(){
+    public String getQuestions() {
         return this.questions;
     }
-    public void setQuestions(String questions){
+
+    public void setQuestions(String questions) {
         this.questions = questions;
     }
-    public String getQuestionsLike(){
+
+    public String getQuestionsLike() {
         return this.questionsLike;
     }
-    public void setQuestionsLike(String questionsLike){
+
+    public void setQuestionsLike(String questionsLike) {
         this.questionsLike = questionsLike;
     }
 
-    public String getIndicationProf(){
+    public String getIndicationProf() {
         return this.indicationProf;
     }
-    public void setIndicationProf(String indicationProf){
+
+    public void setIndicationProf(String indicationProf) {
         this.indicationProf = indicationProf;
     }
-    public String getIndicationProfLike(){
+
+    public String getIndicationProfLike() {
         return this.indicationProfLike;
     }
-    public void setIndicationProfLike(String indicationProfLike){
+
+    public void setIndicationProfLike(String indicationProfLike) {
         this.indicationProfLike = indicationProfLike;
     }
 
-    public String getNumeroOrder(){
+    public String getNumeroOrder() {
         return this.numeroOrder;
     }
-    public void setNumeroOrder(String numeroOrder){
+
+    public void setNumeroOrder(String numeroOrder) {
         this.numeroOrder = numeroOrder;
-    }   
-    public String getNumeroOrderMin(){
+    }
+
+    public String getNumeroOrderMin() {
         return this.numeroOrderMin;
     }
-    public void setNumeroOrderMin(String numeroOrderMin){
+
+    public void setNumeroOrderMin(String numeroOrderMin) {
         this.numeroOrderMin = numeroOrderMin;
     }
-    public String getNumeroOrderMax(){
+
+    public String getNumeroOrderMax() {
         return this.numeroOrderMax;
     }
-    public void setNumeroOrderMax(String numeroOrderMax){
+
+    public void setNumeroOrderMax(String numeroOrderMax) {
         this.numeroOrderMax = numeroOrderMax;
     }
-      
-    public String getUrl(){
+
+    public String getUrl() {
         return this.url;
     }
-    public void setUrl(String url){
+
+    public void setUrl(String url) {
         this.url = url;
-    }   
-    public String getUrlMin(){
+    }
+
+    public String getUrlMin() {
         return this.urlMin;
     }
-    public void setUrlMin(String urlMin){
+
+    public void setUrlMin(String urlMin) {
         this.urlMin = urlMin;
     }
-    public String getUrlMax(){
+
+    public String getUrlMax() {
         return this.urlMax;
     }
-    public void setUrlMax(String urlMax){
+
+    public void setUrlMax(String urlMax) {
         this.urlMax = urlMax;
     }
-      
-    public String getContent(){
+
+    public String getContent() {
         return this.content;
     }
-    public void setContent(String content){
+
+    public void setContent(String content) {
         this.content = content;
-    }   
-    public String getContentMin(){
+    }
+
+    public String getContentMin() {
         return this.contentMin;
     }
-    public void setContentMin(String contentMin){
+
+    public void setContentMin(String contentMin) {
         this.contentMin = contentMin;
     }
-    public String getContentMax(){
+
+    public String getContentMax() {
         return this.contentMax;
     }
-    public void setContentMax(String contentMax){
+
+    public void setContentMax(String contentMax) {
         this.contentMax = contentMax;
     }
-      
 
-    public CategorieSectionCriteria getCategorieSection(){
+
+    public CategorieSectionCriteria getCategorieSection() {
         return this.categorieSection;
     }
 
-    public void setCategorieSection(CategorieSectionCriteria categorieSection){
+    public void setCategorieSection(CategorieSectionCriteria categorieSection) {
         this.categorieSection = categorieSection;
     }
-    public List<CategorieSectionCriteria> getCategorieSections(){
+
+    public List<CategorieSectionCriteria> getCategorieSections() {
         return this.categorieSections;
     }
 
-    public void setCategorieSections(List<CategorieSectionCriteria> categorieSections){
+    public void setCategorieSections(List<CategorieSectionCriteria> categorieSections) {
         this.categorieSections = categorieSections;
     }
-    public CoursCriteria getCours(){
+
+    public CoursCriteria getCours() {
         return this.cours;
     }
 
-    public void setCours(CoursCriteria cours){
+    public void setCours(CoursCriteria cours) {
         this.cours = cours;
     }
-    public List<CoursCriteria> getCourss(){
+
+    public List<CoursCriteria> getCourss() {
         return this.courss;
     }
 
-    public void setCourss(List<CoursCriteria> courss){
+    public void setCourss(List<CoursCriteria> courss) {
         this.courss = courss;
     }
-    public SessionCoursCriteria getSessionCours(){
+
+    public SessionCoursCriteria getSessionCours() {
         return this.sessionCours;
     }
 
-    public void setSessionCours(SessionCoursCriteria sessionCours){
+    public void setSessionCours(SessionCoursCriteria sessionCours) {
         this.sessionCours = sessionCours;
     }
-    public List<SessionCoursCriteria> getSessionCourss(){
+
+    public List<SessionCoursCriteria> getSessionCourss() {
         return this.sessionCourss;
     }
 
-    public void setSessionCourss(List<SessionCoursCriteria> sessionCourss){
+    public void setSessionCourss(List<SessionCoursCriteria> sessionCourss) {
         this.sessionCourss = sessionCourss;
     }
 
@@ -271,5 +322,21 @@ public class SectionCriteria extends  BaseCriteria  {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public boolean isQuizExist() {
+        return quizExist;
+    }
+
+    public void setQuizExist(boolean quizExist) {
+        this.quizExist = quizExist;
+    }
+
+    public List<String> getCategorieLibelles() {
+        return categorieLibelles;
+    }
+
+    public void setCategorieLibelles(List<String> categorieLibelles) {
+        this.categorieLibelles = categorieLibelles;
     }
 }

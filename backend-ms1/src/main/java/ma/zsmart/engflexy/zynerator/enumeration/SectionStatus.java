@@ -4,6 +4,7 @@ public enum SectionStatus {
     VALIDATE("VALIDATE"),
     CONTENU_MESSING("CONTENU_MESSING"),
     MEDIA_MESSING("MEDIA_MESSING"),
+    QUIZ_MESSING("QUIZ_MESSING"),
     PENDING("PENDING");
 
     private final String value;

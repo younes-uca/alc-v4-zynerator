@@ -24,6 +24,7 @@ public class SectionDto extends AuditBaseDto {
     private Integer url = 0;
     private Integer content = 0;
     private String status;
+    private boolean quizExist;
 
     private CategorieSectionDto categorieSection;
     private CoursDto cours;
@@ -185,5 +186,13 @@ public class SectionDto extends AuditBaseDto {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public boolean isQuizExist() {
+        return quizExist;
+    }
+
+    public void setQuizExist(boolean quizExist) {
+        this.quizExist = quizExist;
     }
 }

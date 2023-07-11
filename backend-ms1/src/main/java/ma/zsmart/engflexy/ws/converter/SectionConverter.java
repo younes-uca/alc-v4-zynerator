@@ -11,7 +11,6 @@ import ma.zsmart.engflexy.bean.core.SessionCours;
 
 import ma.zsmart.engflexy.zynerator.util.StringUtil;
 import ma.zsmart.engflexy.zynerator.converter.AbstractConverter;
-import ma.zsmart.engflexy.zynerator.util.DateUtil;
 import ma.zsmart.engflexy.bean.history.SectionHistory;
 import ma.zsmart.engflexy.bean.core.Section;
 import ma.zsmart.engflexy.ws.dto.SectionDto;
@@ -69,6 +68,7 @@ public class SectionConverter extends AbstractConverter<Section, SectionDto, Sec
                 item.setUrl(dto.getUrl());
             if (StringUtil.isNotEmpty(dto.getContent()))
                 item.setContent(dto.getContent());
+            item.setQuizExist(dto.isQuizExist());
             if (dto.getStatus() != null)
                 item.setStatus(SectionStatus.toEnum(dto.getStatus()));
             if (dto.getCategorieSection() != null && dto.getCategorieSection().getId() != null) {
@@ -128,6 +128,7 @@ public class SectionConverter extends AbstractConverter<Section, SectionDto, Sec
                 dto.setContent(item.getContent());
             if (item.getStatus() != null)
                 dto.setStatus(item.getStatus().tostring());
+            dto.setQuizExist(item.isQuizExist());
             if (this.categorieSection && item.getCategorieSection() != null) {
                 categorieSectionConverter.setSections(false);
                 dto.setCategorieSection(categorieSectionConverter.toDto(item.getCategorieSection()));
@@ -137,7 +138,7 @@ public class SectionConverter extends AbstractConverter<Section, SectionDto, Sec
                 dto.setCours(coursConverter.toDto(item.getCours()));
             }
             if (this.sessionCours && item.getSessionCours() != null) {
-                sectionItemConverter.setSection(false);
+                sessionCoursConverter.setSections(false);
                 dto.setSessionCours(sessionCoursConverter.toDto(item.getSessionCours()));
             }
             if (this.sectionItems && ListUtil.isNotEmpty(item.getSectionItems())) {
@@ -147,7 +148,6 @@ public class SectionConverter extends AbstractConverter<Section, SectionDto, Sec
                 sectionItemConverter.setSection(true);
 
             }
-
 
             return dto;
         }

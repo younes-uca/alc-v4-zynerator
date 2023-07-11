@@ -15,4 +15,9 @@ export class StringUtilService {
     public isNotEmpty(value: any): boolean {
         return !this.isEmpty(value);
     }
+
+    public contains(str: string, array: Array<string>): boolean {
+        if (str == null) return false;
+        return array.filter(con => str.toLowerCase().includes(con)).length != 0
+    }
 }

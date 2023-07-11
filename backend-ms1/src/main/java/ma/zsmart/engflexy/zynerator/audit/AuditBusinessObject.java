@@ -2,12 +2,14 @@ package ma.zsmart.engflexy.zynerator.audit;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import ma.zsmart.engflexy.bean.core.Quiz;
 import ma.zsmart.engflexy.zynerator.bean.BusinessObject;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
+import java.util.function.BiConsumer;
 
 /**
  * Classe mère abstraite de tous les Objets métier.
@@ -129,5 +131,10 @@ public class AuditBusinessObject extends BusinessObject {
      */
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    protected  <O, T> void updateAttr(O object, BiConsumer<O, T> setter, T newValue) {
+        if (newValue == null) return;
+        setter.accept(object, newValue);
     }
 }

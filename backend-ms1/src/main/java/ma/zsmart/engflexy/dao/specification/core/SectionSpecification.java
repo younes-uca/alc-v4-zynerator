@@ -21,6 +21,10 @@ public class SectionSpecification extends  AbstractSpecification<SectionCriteria
         }
     }
 
+    public void addPredicateQuiz() {
+        predicates.add(builder.equal(builder.lower(root.get("quizExist")), criteria.isQuizExist()));
+    }
+
     @Override
     public void constructPredicates() {
         addPredicateId("id", criteria);
@@ -39,6 +43,7 @@ public class SectionSpecification extends  AbstractSpecification<SectionCriteria
         addPredicateFk("categorieSection","id", criteria.getCategorieSection()==null?null:criteria.getCategorieSection().getId());
         addPredicateFk("categorieSection","id", criteria.getCategorieSections());
         addPredicateFk("categorieSection","code", criteria.getCategorieSection()==null?null:criteria.getCategorieSection().getCode());
+        addPredicateStrIn("categorieSection","libelle", criteria.getCategorieLibelles());
         addPredicateFk("cours","id", criteria.getCours()==null?null:criteria.getCours().getId());
         addPredicateFk("cours","id", criteria.getCourss());
         addPredicateFk("cours","code", criteria.getCours()==null?null:criteria.getCours().getCode());
@@ -46,6 +51,7 @@ public class SectionSpecification extends  AbstractSpecification<SectionCriteria
         addPredicateFk("sessionCours","id", criteria.getSessionCourss());
         addPredicateFk("sessionCours","reference", criteria.getSessionCours()==null?null:criteria.getSessionCours().getReference());
         addPredicateStatus();
+        addPredicateQuiz();
     }
 
     public SectionSpecification(SectionCriteria criteria) {

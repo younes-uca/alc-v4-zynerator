@@ -133,6 +133,12 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
         }
     }
 
+    public void addPredicateStrIn(String name, List<String> valuesIn) {
+        if (valuesIn.size() > 0) {
+            predicates.add(root.<String>get(name).in(valuesIn));
+        }
+    }
+
     public void addPredicate(String name, String value) {
         if (StringUtil.isNotEmpty(value)) {
             predicates.add(builder.equal(root.<String>get(name), value));
@@ -232,6 +238,13 @@ public abstract class SpecificationHelper<Criteria extends BaseCriteria, H exten
             predicates.add(builder.equal(root.get(nameObject).get(nameAttribute), value));
         }
     }
+
+    public void addPredicateStrIn(String nameObject, String nameAttribute, List<String> values) {
+        if (values != null && values.size() > 0) {
+            predicates.add(root.get(nameObject).get(nameAttribute).in(values));
+        }
+    }
+
     public void addPredicateFk(String nameObject, String nameAttribute, Boolean value) {
         if (value != null) {
             predicates.add(builder.equal(root.get(nameObject).get(nameAttribute), value));

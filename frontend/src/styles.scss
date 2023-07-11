@@ -244,24 +244,27 @@ $gutter: 1rem; //for primeflex grid system
 $clr-black: #000;
 $clr-white: #fff;
 $clr-primary: #0011FF;
-$clr-green: #3b8b00;
+$clr-green: #5E8F32;
 $clr-purple: #2200AE;
-$clr-blue: #2233D4;
-$clr-red: #D42240;
-$clr-orange: #ffa500;
+$clr-blue: #027ABC;
+$clr-red: #C02929;
+$clr-orange: #FAB710;
+$clr-gray: #8F8F8F;
 
 $status-clr: (
         'VALIDATE': $clr-green,
         'MEDIA.MESSING': $clr-purple,
         'CONTENU.MESSING': $clr-blue,
+        'QUIZ.MESSING ':  $clr-red,
         'PENDING':  $clr-orange,
 );
 
 $buttons-clr: (
         'red': $clr-red,
         'blue': $clr-blue,
-        'green': $clr-orange,
-        'orange': $clr-green
+        'orange': $clr-orange,
+        'green': $clr-green,
+        'gray': $clr-gray,
 );
 
 table {
@@ -291,13 +294,17 @@ table {
 
     button {
       padding: 3px 15px;
-      border-radius: 40px;
+      border-radius: 5px;
       white-space: nowrap;
       text-transform: capitalize;
       border: 1px solid transparent;
       color: $clr-white;
       transition: .3s;
       cursor: pointer;
+
+      &.gray {
+        cursor: auto;
+      }
 
       @each $class, $color in $buttons-clr {
         &.#{$class} {
@@ -307,6 +314,10 @@ table {
             color: $color;
             border-color: $color;
             background: transparent;
+          }
+
+          span {
+            margin-right: 5px;
           }
         }
       }

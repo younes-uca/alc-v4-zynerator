@@ -15,7 +15,6 @@ public interface SectionAdminService extends  IService<Section,SectionCriteria, 
     int deleteByCoursId(Long id);
     List<Section> findBySessionCoursId(Long id);
     int deleteBySessionCoursId(Long id);
-
-
-
+    @Override
+    Section update(Section section);
 }
